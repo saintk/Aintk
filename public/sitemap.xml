@@ -3,62 +3,62 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://localhost:1313/links/</loc>
+    <loc>http://aintk.xyz/home/</loc>
     <lastmod>2018-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>http://aintk.xyz/links/</loc>
     <lastmod>2018-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/hello-world/</loc>
+    <loc>http://aintk.xyz/about/</loc>
     <lastmod>2018-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/hugo-nuo-post-preview/</loc>
+    <loc>http://aintk.xyz/post/hugo-nuo-post-preview/</loc>
     <lastmod>2013-07-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>http://aintk.xyz/</loc>
     <lastmod>2018-05-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>http://aintk.xyz/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/hugo/</loc>
-    <lastmod>2018-05-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/markdown/</loc>
+    <loc>http://aintk.xyz/tags/hugo/</loc>
     <lastmod>2013-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/</loc>
-    <lastmod>2018-05-30T00:00:00+00:00</lastmod>
+    <loc>http://aintk.xyz/tags/markdown/</loc>
+    <lastmod>2013-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2018-05-30T00:00:00+00:00</lastmod>
+    <loc>http://aintk.xyz/post/</loc>
+    <lastmod>2013-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/theme/</loc>
+    <loc>http://aintk.xyz/tags/</loc>
+    <lastmod>2013-07-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://aintk.xyz/tags/theme/</loc>
     <lastmod>2013-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
