@@ -3,62 +3,62 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://aintk.xyz/home/</loc>
+    <loc>https://www.aintk.xyz/home/</loc>
     <lastmod>2018-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aintk.xyz/links/</loc>
+    <loc>https://www.aintk.xyz/links/</loc>
     <lastmod>2018-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aintk.xyz/about/</loc>
+    <loc>https://www.aintk.xyz/about/</loc>
     <lastmod>2018-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aintk.xyz/post/hugo-nuo-post-preview/</loc>
+    <loc>https://www.aintk.xyz/post/hugo-nuo-post-preview/</loc>
     <lastmod>2013-07-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aintk.xyz/</loc>
+    <loc>https://www.aintk.xyz/</loc>
     <lastmod>2018-05-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aintk.xyz/categories/</loc>
+    <loc>https://www.aintk.xyz/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aintk.xyz/tags/hugo/</loc>
+    <loc>https://www.aintk.xyz/tags/hugo/</loc>
     <lastmod>2013-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aintk.xyz/tags/markdown/</loc>
+    <loc>https://www.aintk.xyz/tags/markdown/</loc>
     <lastmod>2013-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aintk.xyz/post/</loc>
+    <loc>https://www.aintk.xyz/post/</loc>
     <lastmod>2013-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aintk.xyz/tags/</loc>
+    <loc>https://www.aintk.xyz/tags/</loc>
     <lastmod>2013-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aintk.xyz/tags/theme/</loc>
+    <loc>https://www.aintk.xyz/tags/theme/</loc>
     <lastmod>2013-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

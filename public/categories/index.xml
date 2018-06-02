@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Aintk</title>
-    <link>http://aintk.xyz/categories/</link>
+    <link>https://www.aintk.xyz/categories/</link>
     <description>Recent content in Categories on Aintk</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>en-us</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
     
-	<atom:link href="http://aintk.xyz/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.aintk.xyz/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
