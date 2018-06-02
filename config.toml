@@ -1,4 +1,4 @@
-baseURL = "http://aintk.xyz"
+baseURL = "https://aintk.xyz"
 languageCode = "en"
 title = "Aintk"
 theme = "hugo-nuo"
