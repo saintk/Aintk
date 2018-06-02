@@ -4,6 +4,8 @@ tags: ["Markdown", "Theme", "Hugo"]
 date: 2013-07-17
 ---
 
+注：转载自主题模板提供者的example.[Ritchie Pub.](https://laozhu.me/)
+
 这篇文章集中说明本人博客主题所支持的 Markdown 语法和 Hugo Shortcodes 插件，你也可以在这里预览到他们的样子。如果你不喜欢某些部分的样式，可以去修改 `content.scss` 和 `shortcodes.scss` 这两个文件。预告一下，我所用的这个名为 `Nuo` 的 `Hugo` 也将于近期发布，敬请期待。
 
 <!--more-->

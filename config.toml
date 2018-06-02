@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313"
+baseURL = "http://aintk.xyz"
 languageCode = "en"
 title = "Aintk"
 theme = "hugo-nuo"
@@ -16,17 +16,17 @@ googleAnalytics = "UA-XXXXXXXX-X"
 copyright = "© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce."
 
 # Initial site menu, you can extend menu with content.
-[[menu.main]]
-  name = "Home"
-  weight = 10
-  identifier = "home"
-  url = "/"
+# [[menu.main]]
+#   name = "Home"
+#   weight = 10
+#   identifier = "home"
+#   url = "/"
 
 [[menu.main]]
   name = "Posts"
   weight = 20
-  identifier = "posts"
-  url = "/posts/"
+  identifier = "post"
+  url = "/post/"
 
 [[menu.main]]
   name = "Tags"
@@ -39,16 +39,16 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
   author = "Sid Wang"
   avatar = "/img/tribal-graffiti-alphabet-s.jpg"
   seotitle = "Aintk"
-  subtitle = "~ 命若琴弦 ~"
+  subtitle = "~ 功不唐捐 玉汝于成 ~"
   description = "Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again."
   paginate = 10
 
   # Choose your social networks
   email = "aintk@hotmail.com"
-  github = "github_username"
-  twitter = "twitter_username"
-  linkedin = "linkedin_username"
-  weibo = "weibo_username"
+  github = "saintk"
+  #twitter = "twitter_username"
+  #linkedin = "linkedin_username"
+  #weibo = "weibo_username"
   wechat= "/img/qrcode.jpg" # Replace with your wechat qrcode image
   # facebook = "facebook_username"
   # google = "googlplus_id_number"
@@ -64,7 +64,7 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
   # codepen = "codepen_username"
   # zhihu = "zhihu_username"
   # douban = "douban_username"
-  # bilibili = "bilibili_id_number"
+  bilibili = "4471633"
 
   # Changyan Comments (China Only)
   changyan = false
