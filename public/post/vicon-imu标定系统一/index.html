@@ -5,10 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Posts
-   | Aintk
-</title>
+  <title>vicon-imu标定系统（一）</title>
 
   
   
@@ -19,22 +16,34 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content="" />
+  <meta name="description" content=" 1. 基本理念 一般情况对imu的简单建模：
+$$ X{m}=X{t}&#43;X{b}&#43;X{n} $$
+其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声 零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。 因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。
+然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。 因此使用高精度的动作捕获系统vicon来估计这个值，无需多于的工作量。
+2. 理论推导 " />
 
   
   
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="Posts" />
-    <meta name="twitter:description" content="" />
+    <meta name="twitter:title" content="vicon-imu标定系统（一）" />
+    <meta name="twitter:description" content=" 1. 基本理念 一般情况对imu的简单建模：
+$$ X{m}=X{t}&#43;X{b}&#43;X{n} $$
+其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声 零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。 因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。
+然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。 因此使用高精度的动作捕获系统vicon来估计这个值，无需多于的工作量。
+2. 理论推导 " />
     <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
   
 
   
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Posts" />
-  <meta property="og:description" content="" />
-  <meta property="og:url" content="https://www.aintk.xyz/post/" />
+  <meta property="og:title" content="vicon-imu标定系统（一）" />
+  <meta property="og:description" content=" 1. 基本理念 一般情况对imu的简单建模：
+$$ X{m}=X{t}&#43;X{b}&#43;X{n} $$
+其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声 零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。 因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。
+然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。 因此使用高精度的动作捕获系统vicon来估计这个值，无需多于的工作量。
+2. 理论推导 " />
+  <meta property="og:url" content="https://www.aintk.xyz/post/vicon-imu%E6%A0%87%E5%AE%9A%E7%B3%BB%E7%BB%9F%E4%B8%80/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
 
@@ -43,7 +52,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://www.aintk.xyz/post/" />
+<link rel="canonical" href="https://www.aintk.xyz/post/vicon-imu%E6%A0%87%E5%AE%9A%E7%B3%BB%E7%BB%9F%E4%B8%80/" />
 <link rel="alternative" href="https://www.aintk.xyz/index.xml" title="Aintk" type="application/atom+xml" />
 
 
@@ -107,6 +116,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -134,8 +147,6 @@
           </li>
       
         <li class="menu-item
-            
-              is-active
             
             
             ">
@@ -229,60 +240,62 @@
   </nav>
 </header>
 
-  <section class="main post-list">
-    <header class="list-header offscreen">
-      <h2 class="list-label">Posts List</h2>
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">vicon-imu标定系统（一）</h1>
+      <p class="post-meta">@Sid Wang · Jun 5, 2018 · 1 min read</p>
     </header>
+    <article class="post-content">
+
+<h2 id="1-基本理念">1. 基本理念</h2>
+
+<p>一般情况对imu的简单建模：</p>
+
+<p>$$ X<em>{m}=X</em>{t}+X<em>{b}+X</em>{n} $$</p>
+
+<p>其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声
+零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。
+因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。</p>
+
+<p>然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。
+因此使用高精度的动作捕获系统vicon来估计这个值，无需多于的工作量。</p>
+
+<h2 id="2-理论推导">2. 理论推导</h2>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://www.aintk.xyz/tags/vio"><span class="tag">VIO</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
     
     
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://www.aintk.xyz/post/%E6%9C%89%E7%82%B9%E5%BF%83%E7%83%A6/" class="post-link">有点心烦</a></h3>
-    <p class="post-meta">@Sid Wang · Jun 5, 2018 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">BUG 调不出啊，狠难受啊！！！ 有点想放弃了！！！</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://www.aintk.xyz/post/%E6%9C%89%E7%82%B9%E5%BF%83%E7%83%A6/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://www.aintk.xyz/post/vicon-imu%E6%A0%87%E5%AE%9A%E7%B3%BB%E7%BB%9F%E4%B8%80/" class="post-link">vicon-imu标定系统（一）</a></h3>
-    <p class="post-meta">@Sid Wang · Jun 5, 2018 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary"> 1. 基本理念 一般情况对imu的简单建模：
-$$ X{m}=X{t}&#43;X{b}&#43;X{n} $$
-其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声 零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。 因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。
-然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。 因此使用高精度的动作捕获系统vicon来估计这个值，无需多于的工作量。
-2. 理论推导 </p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://www.aintk.xyz/post/vicon-imu%E6%A0%87%E5%AE%9A%E7%B3%BB%E7%BB%9F%E4%B8%80/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://www.aintk.xyz/post/hugo-nuo-post-preview/" class="post-link">Hugo 主题 Nuo 文章样式预览</a></h3>
-    <p class="post-meta">@Sid Wang · Jul 17, 2013 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">注：转载自主题模板提供者的example.Ritchie Pub.
-这篇文章集中说明本人博客主题所支持的 Markdown 语法和 Hugo Shortcodes 插件，你也可以在这里预览到他们的样子。如果你不喜欢某些部分的样式，可以去修改 content.scss 和 shortcodes.scss 这两个文件。预告一下，我所用的这个名为 Nuo 的 Hugo 也将于近期发布，敬请期待。
-
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://www.aintk.xyz/post/hugo-nuo-post-preview/">Read More →</a>
-  </footer>
-</article>
-
-      
     
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "disqus_shortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     
   </section>
   <footer class="site-footer">

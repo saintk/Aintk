@@ -5,7 +5,11 @@
   <meta charset="utf-8" />
 
   
-  <title>Aintk</title>
+  <title>
+  Tag → 杂谈
+  
+   | Aintk
+</title>
 
   
   
@@ -29,7 +33,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Aintk" />
   <meta property="og:description" content="Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again." />
-  <meta property="og:url" content="https://www.aintk.xyz/" />
+  <meta property="og:url" content="https://www.aintk.xyz/tags/%E6%9D%82%E8%B0%88/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
 
@@ -38,7 +42,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://www.aintk.xyz/" />
+<link rel="canonical" href="https://www.aintk.xyz/tags/%E6%9D%82%E8%B0%88/" />
 <link rel="alternative" href="https://www.aintk.xyz/index.xml" title="Aintk" type="application/atom+xml" />
 
 
@@ -73,6 +77,8 @@
 
 
 
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
 <link rel="stylesheet" href="https://www.aintk.xyz/css/bundle.ff02473a9a.css" />
 
 
@@ -106,7 +112,7 @@
   <header class="site-header">
   <img class="avatar" src="https://www.aintk.xyz/img/tribal-graffiti-alphabet-s.jpg" alt="Avatar">
   
-  <h1 class="title">Aintk</h1>
+  <h2 class="title">Aintk</h2>
   
   <p class="subtitle">~ 功不唐捐 玉汝于成 ~</p>
   <button class="menu-toggle" type="button">
@@ -222,7 +228,7 @@
 
   <section class="main post-list">
     <header class="list-header offscreen">
-      <h2 class="list-label">All Posts</h2>
+      <h2 class="list-label">Posts List</h2>
     </header>
     
     
@@ -240,39 +246,6 @@
 </article>
 
       
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://www.aintk.xyz/post/vicon-imu%E6%A0%87%E5%AE%9A%E7%B3%BB%E7%BB%9F%E4%B8%80/" class="post-link">vicon-imu标定系统（一）</a></h3>
-    <p class="post-meta">@Sid Wang · Jun 5, 2018 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary"> 1. 基本理念 一般情况对imu的简单建模：
-$$ X{m}=X{t}&#43;X{b}&#43;X{n} $$
-其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声 零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。 因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。
-然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。 因此使用高精度的动作捕获系统vicon来估计这个值，无需多于的工作量。
-2. 理论推导 </p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://www.aintk.xyz/post/vicon-imu%E6%A0%87%E5%AE%9A%E7%B3%BB%E7%BB%9F%E4%B8%80/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://www.aintk.xyz/post/hugo-nuo-post-preview/" class="post-link">Hugo 主题 Nuo 文章样式预览</a></h3>
-    <p class="post-meta">@Sid Wang · Jul 17, 2013 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">注：转载自主题模板提供者的example.Ritchie Pub.
-这篇文章集中说明本人博客主题所支持的 Markdown 语法和 Hugo Shortcodes 插件，你也可以在这里预览到他们的样子。如果你不喜欢某些部分的样式，可以去修改 content.scss 和 shortcodes.scss 这两个文件。预告一下，我所用的这个名为 Nuo 的 Hugo 也将于近期发布，敬请期待。
-
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://www.aintk.xyz/post/hugo-nuo-post-preview/">Read More →</a>
-  </footer>
-</article>
-
-      
     
     
   </section>
@@ -283,6 +256,30 @@ $$ X{m}=X{t}&#43;X{b}&#43;X{n} $$
 </footer>
 
 
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
 
 <script src="https://www.aintk.xyz/js/bundle.d1288006cf.js"></script>
 

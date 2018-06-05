@@ -67,7 +67,7 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
   bilibili = "4471633"
 
   # Changyan Comments (China Only)
-  changyan = true
+  changyan = false
   changyanId = "cyt3toRiB"
   changyanConf = "prod_0908b1cb9a581501753cce1ed074dbe3"
 
