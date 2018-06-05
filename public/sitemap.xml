@@ -44,18 +44,6 @@
   </url>
   
   <url>
-    <loc>https://www.aintk.xyz/tags/hugo/</loc>
-    <lastmod>2013-07-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aintk.xyz/tags/markdown/</loc>
-    <lastmod>2013-07-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://www.aintk.xyz/post/</loc>
     <lastmod>2018-06-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -63,7 +51,6 @@
   
   <url>
     <loc>https://www.aintk.xyz/tags/</loc>
-    <lastmod>2013-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

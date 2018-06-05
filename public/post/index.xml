@@ -13,15 +13,16 @@
     
     
     <item>
-      <title>vicon-imu标定系统（一）</title>
+      <title>vicon-imu标定系统</title>
       <link>https://www.aintk.xyz/post/vicon-imu%E6%A0%87%E5%AE%9A%E7%B3%BB%E7%BB%9F%E4%B8%80/</link>
       <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>https://www.aintk.xyz/post/vicon-imu%E6%A0%87%E5%AE%9A%E7%B3%BB%E7%BB%9F%E4%B8%80/</guid>
-      <description> 1. 基本理念 一般情况对imu的简单建模：
-$$ X{m}=X{t}+X{b}+X{n} $$
-其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声 零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。 因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。
-然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。 因此使用高精度的动作捕获系统vicon来估计这个值，无需多于的工作量。
+      <description> 1. 基本理念 一般情况对imu的简单建模
+$$ X_{m}=X_{t}+X_{b}+X_{n} $$
+其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声
+零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。 因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。
+然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。 因此使用高精度的动作捕获系统vicon来估计这个值，无需多余的工作量。
 2. 理论推导 </description>
     </item>
     
@@ -31,7 +32,8 @@ $$ X{m}=X{t}+X{b}+X{n} $$
       <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>https://www.aintk.xyz/post/%E6%9C%89%E7%82%B9%E5%BF%83%E7%83%A6/</guid>
-      <description>BUG 调不出啊，狠难受啊！！！ 有点想放弃了！！！</description>
+      <description>BUG 调不出啊，狠难受啊！！！ 有点想放弃了！！！
+感觉可以推倒重新来过了。。。</description>
     </item>
     
     <item>
