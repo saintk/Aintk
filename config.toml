@@ -7,7 +7,7 @@ PygmentsCodeFences = true
 canonifyurls = true
 
 # Disqus Username
-disqusShortname = "disqus_shortname"
+disqusShortname = "aintk"
 
 # Google Analytics UA number
 googleAnalytics = "UA-XXXXXXXX-X"
@@ -40,7 +40,7 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
   avatar = "/img/tribal-graffiti-alphabet-s.jpg"
   seotitle = "Aintk"
   subtitle = "~ 功不唐捐 玉汝于成 ~"
-  description = "Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again."
+  description = "王兆圣的个人博客"
   paginate = 10
 
   # Choose your social networks
