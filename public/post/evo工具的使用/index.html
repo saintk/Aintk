@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>使用evo评估VINS-MONO</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="Sid Wang" />
+  <meta name="description" content="EVO工具用于评估SLAM算法在现有数据集上的效果。
+源码在 https://github.com/MichaelGrupp/evo
+目前支持 TUM KITTI Euroc 等格式
+evo工具提供了3种误差评估方式:
+ evo_ape -absoulte pose error
+ evo_rpe -relative pose error
+ evo_rpe -for-each -sub-sequence-wise averaged pose error  4种工具：
+ evo_traj - tool for analyzing, plotting or exporting one or more trajectories evo_res - tool for comparing one or multiple result files from evo_ape or evo_rpe evo_fig - (experimental) tool for re-opening serialized plots (saved with &amp;ndash;serialize_plot) evo_config - tool for global settings and config file manipulation  1." />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="使用evo评估VINS-MONO" />
+    <meta name="twitter:description" content="EVO工具用于评估SLAM算法在现有数据集上的效果。
+源码在 https://github.com/MichaelGrupp/evo
+目前支持 TUM KITTI Euroc 等格式
+evo工具提供了3种误差评估方式:
+ evo_ape -absoulte pose error
+ evo_rpe -relative pose error
+ evo_rpe -for-each -sub-sequence-wise averaged pose error  4种工具：
+ evo_traj - tool for analyzing, plotting or exporting one or more trajectories evo_res - tool for comparing one or multiple result files from evo_ape or evo_rpe evo_fig - (experimental) tool for re-opening serialized plots (saved with &amp;ndash;serialize_plot) evo_config - tool for global settings and config file manipulation  1." />
+    <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="使用evo评估VINS-MONO" />
+  <meta property="og:description" content="EVO工具用于评估SLAM算法在现有数据集上的效果。
+源码在 https://github.com/MichaelGrupp/evo
+目前支持 TUM KITTI Euroc 等格式
+evo工具提供了3种误差评估方式:
+ evo_ape -absoulte pose error
+ evo_rpe -relative pose error
+ evo_rpe -for-each -sub-sequence-wise averaged pose error  4种工具：
+ evo_traj - tool for analyzing, plotting or exporting one or more trajectories evo_res - tool for comparing one or multiple result files from evo_ape or evo_rpe evo_fig - (experimental) tool for re-opening serialized plots (saved with &amp;ndash;serialize_plot) evo_config - tool for global settings and config file manipulation  1." />
+  <meta property="og:url" content="https://www.aintk.xyz/post/evo%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/" />
+  <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://www.aintk.xyz/post/evo%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/" />
+<link rel="alternative" href="https://www.aintk.xyz/index.xml" title="Aintk" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc" />
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587" />
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Aintk" />
+<meta name="msapplication-tooltip" content="Aintk" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://www.aintk.xyz/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.aintk.xyz/img/dragon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.aintk.xyz/img/dragon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://www.aintk.xyz/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://www.aintk.xyz/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://www.aintk.xyz/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://www.aintk.xyz/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://www.aintk.xyz/img/tribal-graffiti-alphabet-s.jpg" alt="Avatar">
+  
+  <h2 class="title">Aintk</h2>
+  
+  <p class="subtitle">~ 功不唐捐 玉汝于成 ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/home/">Home</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/post/">Posts</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/links/">Links</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:aintk@hotmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/saintk" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://www.aintk.xyz/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//space.bilibili.com/4471633" title="Bilibili"><span class="icon icon-bilibili"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="https://www.aintk.xyz/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">使用evo评估VINS-MONO</h1>
+      <p class="post-meta">@Sid Wang · Jun 7, 2018 · 1 min read</p>
+    </header>
+    <article class="post-content">
+
+<p>EVO工具用于评估SLAM算法在现有数据集上的效果。<br />
+源码在 <a href="https://github.com/MichaelGrupp/evo">https://github.com/MichaelGrupp/evo</a><br />
+目前支持 TUM KITTI Euroc 等格式</p>
+
+<p>evo工具提供了3种误差评估方式:</p>
+
+<ul>
+<li><code>evo_ape</code> -absoulte pose error<br /></li>
+<li><code>evo_rpe</code> -relative pose error<br /></li>
+<li><code>evo_rpe</code> -for-each -sub-sequence-wise averaged pose error</li>
+</ul>
+
+<p>4种工具：</p>
+
+<ul>
+<li><code>evo_traj</code> - tool for analyzing, plotting or exporting one or more trajectories</li>
+<li><code>evo_res</code> - tool for comparing one or multiple result files from evo_ape or evo_rpe</li>
+<li><code>evo_fig</code> - (experimental) tool for re-opening serialized plots (saved with &ndash;serialize_plot)</li>
+<li><code>evo_config</code> - tool for global settings and config file manipulation</li>
+</ul>
+
+<h2 id="1-euroc数据集">1. euroc数据集</h2>
+
+<p>以VINS为例子介绍如何使用evo评估其在 euroc数据集上的效果。
+数据集采用 V1_02_medium</p>
+
+<p>euroc的评估支持 .csv的groudtruth 和 tum 格式的轨迹文件.
+首先修改vins源码.
+打开 visulization.cpp, 找到 写文件部分代码，并修改为:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">        <span style="color:#75715e">// write result with tum format, for evo tools
+</span><span style="color:#75715e"></span>        ofstream <span style="color:#a6e22e">foutC</span>(VINS_RESULT_PATH, ios<span style="color:#f92672">::</span>app);
+        foutC.setf(ios<span style="color:#f92672">::</span>fixed, ios<span style="color:#f92672">::</span>floatfield);
+        foutC.precision(<span style="color:#ae81ff">10</span>);
+        foutC <span style="color:#f92672">&lt;&lt;</span> header.stamp.toSec()<span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+        foutC.precision(<span style="color:#ae81ff">5</span>);
+        foutC <span style="color:#f92672">&lt;&lt;</span> estimator.Ps[WINDOW_SIZE].x() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>
+              <span style="color:#f92672">&lt;&lt;</span> estimator.Ps[WINDOW_SIZE].y() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>
+              <span style="color:#f92672">&lt;&lt;</span> estimator.Ps[WINDOW_SIZE].z() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>
+              <span style="color:#f92672">&lt;&lt;</span> tmp_Q.w() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>
+              <span style="color:#f92672">&lt;&lt;</span> tmp_Q.x() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>
+              <span style="color:#f92672">&lt;&lt;</span> tmp_Q.y() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>
+              <span style="color:#f92672">&lt;&lt;</span> tmp_Q.z() <span style="color:#f92672">&lt;&lt;</span> endl;
+        foutC.close();
+</code></pre></div>
+<p>现在我们有了 tum格式的轨迹输出，以及数据集提供的真值state_groundtruth_estimate0/data.csv<br />
+准备工作已经完成，可以使用evo工具进行评估了</p>
+
+<p>首先可们可以使用 evo_traj将轨迹画出来.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">evo_traj tum vins_result_no_loop.txt <span style="color:#f92672">-</span>p <span style="color:#f92672">--</span>plot_mode<span style="color:#f92672">=</span>xyz
+</code></pre></div>
+<p><img src="https://www.aintk.xyz/media/posts/EVO工具的使用/vins_result_no_loop.png" alt="vins轨迹" /></p>
+
+<p>使用evo_ape确定轨迹误差：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">evo_ape euroc data.csv vins_result_no_loop.txt <span style="color:#f92672">-</span>va <span style="color:#f92672">--</span>plot <span style="color:#f92672">--</span>save_results result_vins.zip
+</code></pre></div>
+<p>结果如下：
+<img src="https://www.aintk.xyz/media/posts/EVO工具的使用/ape_map.png" alt="vins_ape轨迹" />
+<img src="https://www.aintk.xyz/media/posts/EVO工具的使用/ape_raw.png" alt="vins_ape_raw" /></p>
+
+<p>这个工具非常好的一点就是，不用去管坐标系的相对变化。两个体坐标系之间的变换，两个世界系的变换，都不用考虑，它会自动调整，并将相对变换输出出来.</p>
+
+<h2 id="2-使用自己的数据集">2.使用自己的数据集</h2>
+
+<p>更多情况下，我们需要自己采集数据并评估。<br />
+通过采集vicon数据，我们可以制作自己的真值，直接做成tum的真值格式，方便使用和计算。<br />
+需要注意的是，各传感器之间的时间同步。</p>
+
+<p>首先可以画出轨迹：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">evo_traj tum vins_tum_result.txt <span style="color:#f92672">-</span>p <span style="color:#f92672">--</span>plot_mode<span style="color:#f92672">=</span>xyz
+</code></pre></div>
+<p><img src="https://www.aintk.xyz/media/posts/EVO工具的使用/tango_traj.png" alt="vins_tango_traj" />
+<img src="https://www.aintk.xyz/media/posts/EVO工具的使用/tango_traj_xyz.png" alt="vins_tango_traj_xyz" />
+<img src="https://www.aintk.xyz/media/posts/EVO工具的使用/tango_traj_rpy.png" alt="vins_tango_traj_rpy" /></p>
+
+<p>APE：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">evo_ape tum vicon_gt.txt vins_tum_result.txt <span style="color:#f92672">-</span>va <span style="color:#f92672">--</span>plot <span style="color:#f92672">--</span>save_results result_vins.zip
+</code></pre></div>
+<p><img src="https://www.aintk.xyz/media/posts/EVO工具的使用/tango_ape_map.png" alt="vins_tango_ape_map" />
+<img src="https://www.aintk.xyz/media/posts/EVO工具的使用/tango_ape_raw.png" alt="vins_tango_ape_raw" /></p>
+
+<p>最终的结果会保存在 result_vins.zip中<br />
+<code>{&quot;std&quot;: 0.05500716121872294, &quot;rmse&quot;: 0.14635270998813427, &quot;sse&quot;: 10.645300513272854, &quot;max&quot;: 0.3279892445412863, &quot;min&quot;: 0.02701627306479177, &quot;median&quot;: 0.12761697807728675, &quot;mean&quot;: 0.13562200387668794}</code></p>
+
+<h2 id="3-小结">3.小结</h2>
+
+<p>总的来说，这个工具是用起来还是非常方便的，很棒！</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://www.aintk.xyz/tags/vio"><span class="tag">VIO</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aintk" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 Aintk</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://www.aintk.xyz/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-XXXXXXXX-X', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>

@@ -7,10 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Tue, 05 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 07 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.aintk.xyz/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>使用evo评估VINS-MONO</title>
+      <link>https://www.aintk.xyz/post/evo%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Thu, 07 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/evo%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>EVO工具用于评估SLAM算法在现有数据集上的效果。
+源码在 https://github.com/MichaelGrupp/evo
+目前支持 TUM KITTI Euroc 等格式
+evo工具提供了3种误差评估方式:
+ evo_ape -absoulte pose error
+ evo_rpe -relative pose error
+ evo_rpe -for-each -sub-sequence-wise averaged pose error  4种工具：
+ evo_traj - tool for analyzing, plotting or exporting one or more trajectories evo_res - tool for comparing one or multiple result files from evo_ape or evo_rpe evo_fig - (experimental) tool for re-opening serialized plots (saved with &amp;ndash;serialize_plot) evo_config - tool for global settings and config file manipulation  1.</description>
+    </item>
     
     <item>
       <title>vicon-imu标定系统</title>
@@ -34,19 +50,6 @@ $$ X_{m}=X_{t}+X_{b}+X_{n} $$
       <guid>https://www.aintk.xyz/post/%E6%9C%89%E7%82%B9%E5%BF%83%E7%83%A6/</guid>
       <description>BUG 调不出啊，狠难受啊！！！ 有点想放弃了！！！
 感觉可以推倒重新来过了。。。</description>
-    </item>
-    
-    <item>
-      <title>Hugo 主题 Nuo 文章样式预览</title>
-      <link>https://www.aintk.xyz/post/hugo-nuo-post-preview/</link>
-      <pubDate>Wed, 17 Jul 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.aintk.xyz/post/hugo-nuo-post-preview/</guid>
-      <description>&lt;p&gt;注：转载自主题模板提供者的example.&lt;a href=&#34;https://laozhu.me/&#34;&gt;Ritchie Pub.&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;这篇文章集中说明本人博客主题所支持的 Markdown 语法和 Hugo Shortcodes 插件，你也可以在这里预览到他们的样子。如果你不喜欢某些部分的样式，可以去修改 &lt;code&gt;content.scss&lt;/code&gt; 和 &lt;code&gt;shortcodes.scss&lt;/code&gt; 这两个文件。预告一下，我所用的这个名为 &lt;code&gt;Nuo&lt;/code&gt; 的 &lt;code&gt;Hugo&lt;/code&gt; 也将于近期发布，敬请期待。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>
