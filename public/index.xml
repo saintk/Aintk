@@ -37,7 +37,16 @@
       <pubDate>Wed, 30 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://www.aintk.xyz/about/</guid>
-      <description>社会你王哥 以后再补</description>
+      <description>教育背景
+2016年 - 至今， 上海交通大学 电子与通信工程专业 硕士
+2011年 - 2015年，东华大学 自动化专业 学士
+科研背景
+视觉SLAM，VIO，定位
+硕士期间专注室内定位算法，VIO相关应用和研究。
+论文发表情况
+ Wang, Zhaosheng, Qian, Jiuchao, Wang, Yuze, Liu, Peinlin, Yu, Wenxian, &amp;ldquo;A Sparse Direct Visual-Inertial Method for Pedestrian Navigation Using Smartphone Sensors,&amp;rdquo; Proceedings of the 30th International Technical Meeting of The Satellite Division of the Institute of Navigation (ION GNSS+ 2017), Portland, Oregon, September 2017, pp. 3311-3320.
+  项目经历
+ 2017.12 – 至今 鲁棒的视觉惯性系统初始化方法研究</description>
     </item>
     
     <item>
@@ -61,7 +70,7 @@ camera.yml:相机内参.
 3. 使用api获取当前位置 通过调用aruco的相关接口，来获取当前位置. 有四个需要定义的接口:
  CameraParameters TheCameraParameters; // 相机内参 MarkerMap TheMarkerMapConfig; // 地图参数 MarkerDetector TheMarkerDetector; // Marker检测 MarkerMapPoseTracker TheMSPoseTracker; // 位置跟踪接口  具体可以使用也很简单，可以参照官网的接口.
 对每一帧图像可以通过如下操作获得相机位姿.
-vector&amp;lt;aruco::Marker&amp;gt; detectedMarkers = TheMarkerDetector.detect(TheInputImage); for (auto idx:TheMarkerMapConfig.getIndices(detectedMarkers)) detectedMarkers[idx].draw(TheInputImageCopy, Scalar(0, 0, 255), 2); if (TheMSPoseTracker.</description>
+//读取marker_map和相机参数  TheMarkerMapConfig.readFromFile(inputArucoMapPath); TheCameraParameters.readFromXMLFile(cameraParamPath); //获取建图所使用的字典  TheMarkerDetector.setDictionary(TheMarkerMapConfig.getDictionary()); //获取marker的size  if (TheMarkerMapConfig.</description>
     </item>
     
     <item>

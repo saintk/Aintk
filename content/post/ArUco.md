@@ -42,12 +42,25 @@ camera.yml:相机内参.
 具体可以使用也很简单，可以参照官网的接口.   
 对每一帧图像可以通过如下操作获得相机位姿.
 ```cpp
+    //读取marker_map和相机参数
+    TheMarkerMapConfig.readFromFile(inputArucoMapPath); 
+    TheCameraParameters.readFromXMLFile(cameraParamPath); 
+    //获取建图所使用的字典
+    TheMarkerDetector.setDictionary(TheMarkerMapConfig.getDictionary()); 
+    //获取marker的size
+    if (TheMarkerMapConfig.isExpressedInPixels() && TheMarkerSize > 0)
+        TheMarkerMapConfig = TheMarkerMapConfig.convertToMeters(TheMarkerSize);
+    if (TheCameraParameters.isValid() && TheMarkerMapConfig.isExpressedInMeters()) {
+        TheMSPoseTracker.setParams(TheCameraParameters, TheMarkerMapConfig);
+        TheMarkerSize = cv::norm(TheMarkerMapConfig[0][0] - TheMarkerMapConfig[0][1]);
+    }
+
+    //开始跟踪
     vector<aruco::Marker> detectedMarkers = TheMarkerDetector.detect(TheInputImage);
-    for (auto idx:TheMarkerMapConfig.getIndices(detectedMarkers))
-        detectedMarkers[idx].draw(TheInputImageCopy, Scalar(0, 0, 255), 2);
     if (TheMSPoseTracker.isValid()) {
-        if (TheMSPoseTracker.estimatePose(detectedMarkers)) {
-            cv::Mat T = TheMSPoseTracker.getRTMatrix();
-        }
+        if (TheMSPoseTracker.estimatePose(detectedMarkers)) 
+            //获得相机当前的位姿
+            cv::Mat T = TheMSPoseTracker.getRTMatrix(); 
     }
 ```
+实测精度可以达到厘米级。

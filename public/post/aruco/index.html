@@ -31,7 +31,7 @@ camera.yml:相机内参.
 3. 使用api获取当前位置 通过调用aruco的相关接口，来获取当前位置. 有四个需要定义的接口:
  CameraParameters TheCameraParameters; // 相机内参 MarkerMap TheMarkerMapConfig; // 地图参数 MarkerDetector TheMarkerDetector; // Marker检测 MarkerMapPoseTracker TheMSPoseTracker; // 位置跟踪接口  具体可以使用也很简单，可以参照官网的接口.
 对每一帧图像可以通过如下操作获得相机位姿.
-vector&amp;lt;aruco::Marker&amp;gt; detectedMarkers = TheMarkerDetector.detect(TheInputImage); for (auto idx:TheMarkerMapConfig.getIndices(detectedMarkers)) detectedMarkers[idx].draw(TheInputImageCopy, Scalar(0, 0, 255), 2); if (TheMSPoseTracker." />
+//读取marker_map和相机参数  TheMarkerMapConfig.readFromFile(inputArucoMapPath); TheCameraParameters.readFromXMLFile(cameraParamPath); //获取建图所使用的字典  TheMarkerDetector.setDictionary(TheMarkerMapConfig.getDictionary()); //获取marker的size  if (TheMarkerMapConfig." />
 
   
   
@@ -53,7 +53,7 @@ camera.yml:相机内参.
 3. 使用api获取当前位置 通过调用aruco的相关接口，来获取当前位置. 有四个需要定义的接口:
  CameraParameters TheCameraParameters; // 相机内参 MarkerMap TheMarkerMapConfig; // 地图参数 MarkerDetector TheMarkerDetector; // Marker检测 MarkerMapPoseTracker TheMSPoseTracker; // 位置跟踪接口  具体可以使用也很简单，可以参照官网的接口.
 对每一帧图像可以通过如下操作获得相机位姿.
-vector&amp;lt;aruco::Marker&amp;gt; detectedMarkers = TheMarkerDetector.detect(TheInputImage); for (auto idx:TheMarkerMapConfig.getIndices(detectedMarkers)) detectedMarkers[idx].draw(TheInputImageCopy, Scalar(0, 0, 255), 2); if (TheMSPoseTracker." />
+//读取marker_map和相机参数  TheMarkerMapConfig.readFromFile(inputArucoMapPath); TheCameraParameters.readFromXMLFile(cameraParamPath); //获取建图所使用的字典  TheMarkerDetector.setDictionary(TheMarkerMapConfig.getDictionary()); //获取marker的size  if (TheMarkerMapConfig." />
     <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
   
 
@@ -75,7 +75,7 @@ camera.yml:相机内参.
 3. 使用api获取当前位置 通过调用aruco的相关接口，来获取当前位置. 有四个需要定义的接口:
  CameraParameters TheCameraParameters; // 相机内参 MarkerMap TheMarkerMapConfig; // 地图参数 MarkerDetector TheMarkerDetector; // Marker检测 MarkerMapPoseTracker TheMSPoseTracker; // 位置跟踪接口  具体可以使用也很简单，可以参照官网的接口.
 对每一帧图像可以通过如下操作获得相机位姿.
-vector&amp;lt;aruco::Marker&amp;gt; detectedMarkers = TheMarkerDetector.detect(TheInputImage); for (auto idx:TheMarkerMapConfig.getIndices(detectedMarkers)) detectedMarkers[idx].draw(TheInputImageCopy, Scalar(0, 0, 255), 2); if (TheMSPoseTracker." />
+//读取marker_map和相机参数  TheMarkerMapConfig.readFromFile(inputArucoMapPath); TheCameraParameters.readFromXMLFile(cameraParamPath); //获取建图所使用的字典  TheMarkerDetector.setDictionary(TheMarkerMapConfig.getDictionary()); //获取marker的size  if (TheMarkerMapConfig." />
   <meta property="og:url" content="https://www.aintk.xyz/post/aruco/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
@@ -320,15 +320,29 @@ camera.yml:相机内参.<br />
 
 <p>具体可以使用也很简单，可以参照官网的接口.<br />
 对每一帧图像可以通过如下操作获得相机位姿.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    vector<span style="color:#f92672">&lt;</span>aruco<span style="color:#f92672">::</span>Marker<span style="color:#f92672">&gt;</span> detectedMarkers <span style="color:#f92672">=</span> TheMarkerDetector.detect(TheInputImage);
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> idx:TheMarkerMapConfig.getIndices(detectedMarkers))
-        detectedMarkers[idx].draw(TheInputImageCopy, Scalar(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">255</span>), <span style="color:#ae81ff">2</span>);
-    <span style="color:#66d9ef">if</span> (TheMSPoseTracker.isValid()) {
-        <span style="color:#66d9ef">if</span> (TheMSPoseTracker.estimatePose(detectedMarkers)) {
-            cv<span style="color:#f92672">::</span>Mat T <span style="color:#f92672">=</span> TheMSPoseTracker.getRTMatrix();
-        }
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#75715e">//读取marker_map和相机参数
+</span><span style="color:#75715e"></span>    TheMarkerMapConfig.readFromFile(inputArucoMapPath); 
+    TheCameraParameters.readFromXMLFile(cameraParamPath); 
+    <span style="color:#75715e">//获取建图所使用的字典
+</span><span style="color:#75715e"></span>    TheMarkerDetector.setDictionary(TheMarkerMapConfig.getDictionary()); 
+    <span style="color:#75715e">//获取marker的size
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (TheMarkerMapConfig.isExpressedInPixels() <span style="color:#f92672">&amp;&amp;</span> TheMarkerSize <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
+        TheMarkerMapConfig <span style="color:#f92672">=</span> TheMarkerMapConfig.convertToMeters(TheMarkerSize);
+    <span style="color:#66d9ef">if</span> (TheCameraParameters.isValid() <span style="color:#f92672">&amp;&amp;</span> TheMarkerMapConfig.isExpressedInMeters()) {
+        TheMSPoseTracker.setParams(TheCameraParameters, TheMarkerMapConfig);
+        TheMarkerSize <span style="color:#f92672">=</span> cv<span style="color:#f92672">::</span>norm(TheMarkerMapConfig[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> TheMarkerMapConfig[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>]);
     }
-</code></pre></div></article>
+
+    <span style="color:#75715e">//开始跟踪
+</span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>aruco<span style="color:#f92672">::</span>Marker<span style="color:#f92672">&gt;</span> detectedMarkers <span style="color:#f92672">=</span> TheMarkerDetector.detect(TheInputImage);
+    <span style="color:#66d9ef">if</span> (TheMSPoseTracker.isValid()) {
+        <span style="color:#66d9ef">if</span> (TheMSPoseTracker.estimatePose(detectedMarkers)) 
+            <span style="color:#75715e">//获得相机当前的位姿
+</span><span style="color:#75715e"></span>            cv<span style="color:#f92672">::</span>Mat T <span style="color:#f92672">=</span> TheMSPoseTracker.getRTMatrix(); 
+    }
+</code></pre></div>
+<p>实测精度可以达到厘米级。</p>
+</article>
     <footer class="post-footer">
       
       <ul class="post-tags">
