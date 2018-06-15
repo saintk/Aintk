@@ -37,7 +37,9 @@
       <pubDate>Wed, 30 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://www.aintk.xyz/about/</guid>
-      <description>教育背景
+      <description>基本资料
+王兆圣， 上海交通大学-导航与感知实验室-在读研究生
+教育背景
 2016年 - 至今， 上海交通大学 电子与通信工程专业 硕士
 2011年 - 2015年，东华大学 自动化专业 学士
 科研背景
@@ -46,7 +48,7 @@
 论文发表情况
  Wang, Zhaosheng, Qian, Jiuchao, Wang, Yuze, Liu, Peinlin, Yu, Wenxian, &amp;ldquo;A Sparse Direct Visual-Inertial Method for Pedestrian Navigation Using Smartphone Sensors,&amp;rdquo; Proceedings of the 30th International Technical Meeting of The Satellite Division of the Institute of Navigation (ION GNSS+ 2017), Portland, Oregon, September 2017, pp. 3311-3320.
   项目经历
- 2017.12 – 至今 鲁棒的视觉惯性系统初始化方法研究</description>
+ 2017.</description>
     </item>
     
     <item>
@@ -55,22 +57,8 @@
       <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>https://www.aintk.xyz/post/aruco/</guid>
-      <description>1. 配置安装 ArUco库下载:
-https://sourceforge.net/projects/aruco/files/
-这里我使用的是3.0.10版本,按照readme安装。(make install)
-编译安装MarkerMapper:
-https://sourceforge.net/p/markermapper/activity/?page=0&amp;amp;limit=100#5addf1323241d20a481f2a02
-这里我使用的是1.0.12版本，按照readme安装。(make install)
-2. 采集数据并构图 参照Marker_Mapper中的Readme文件，执行一下命令:
-./utils/mapper_from_video video.avi camera.yml 0.1 -out markerset -d dict  其中为拍摄有marker的视频，camera.yml为相机内参，0.1为相关的tag大小， video.avi:拍摄有marker的视频.
-camera.yml:相机内参.
-0.1：为marker的大小，按实际情况给定.
--o map: 生成的文件. -d : 制定使用的marker字典，按照所使用的marker指定，有ARUCO_MIP_16h3 ARUCO_MIP_25h7 ARUCO_MIP_36h12等.
-如图所示: 我们所用的dict为ARUCO_MIP_36h12 最后我们将得到markerset.yml以及相应的pcd文件,如果结果markerset的结果不好请检查相机标定参数和marker的参数.
-3. 使用api获取当前位置 通过调用aruco的相关接口，来获取当前位置. 有四个需要定义的接口:
- CameraParameters TheCameraParameters; // 相机内参 MarkerMap TheMarkerMapConfig; // 地图参数 MarkerDetector TheMarkerDetector; // Marker检测 MarkerMapPoseTracker TheMSPoseTracker; // 位置跟踪接口  具体可以使用也很简单，可以参照官网的接口.
-对每一帧图像可以通过如下操作获得相机位姿.
-//读取marker_map和相机参数  TheMarkerMapConfig.readFromFile(inputArucoMapPath); TheCameraParameters.readFromXMLFile(cameraParamPath); //获取建图所使用的字典  TheMarkerDetector.setDictionary(TheMarkerMapConfig.getDictionary()); //获取marker的size  if (TheMarkerMapConfig.</description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用ArUco库进行定位。
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -79,14 +67,11 @@ camera.yml:相机内参.
       <pubDate>Thu, 07 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>https://www.aintk.xyz/post/evo%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-      <description>EVO工具用于评估SLAM算法在现有数据集上的效果。
-源码在 https://github.com/MichaelGrupp/evo
-目前支持 TUM KITTI Euroc 等格式
-evo工具提供了3种误差评估方式:
- evo_ape -absoulte pose error
- evo_rpe -relative pose error
- evo_rpe -for-each -sub-sequence-wise averaged pose error  4种工具：
- evo_traj - tool for analyzing, plotting or exporting one or more trajectories evo_res - tool for comparing one or multiple result files from evo_ape or evo_rpe evo_fig - (experimental) tool for re-opening serialized plots (saved with &amp;ndash;serialize_plot) evo_config - tool for global settings and config file manipulation  1.</description>
+      <description>&lt;p&gt;EVO工具用于评估SLAM算法在现有数据集上的效果。&lt;br /&gt;
+源码在 &lt;a href=&#34;https://github.com/MichaelGrupp/evo&#34;&gt;https://github.com/MichaelGrupp/evo&lt;/a&gt;&lt;br /&gt;
+目前支持 TUM KITTI Euroc 等格式&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -95,12 +80,8 @@ evo工具提供了3种误差评估方式:
       <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>https://www.aintk.xyz/post/vicon-imu%E6%A0%87%E5%AE%9A%E7%B3%BB%E7%BB%9F%E4%B8%80/</guid>
-      <description> 1. 基本理念 一般情况对imu的简单建模
-$$ X_{m}=X_{t}+X_{b}+X_{n} $$
-其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声
-零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。 因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。
-然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。 因此使用高精度的动作捕获系统vicon来估计这个值，无需多余的工作量。
-2. 理论推导 </description>
+      <description>&lt;p&gt;这篇文章介绍了如何使用vicon系统对imu内参进行标定。
+&lt;/p&gt;</description>
     </item>
     
     <item>

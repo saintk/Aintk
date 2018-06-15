@@ -8,6 +8,8 @@ EVO工具用于评估SLAM算法在现有数据集上的效果。
 源码在 https://github.com/MichaelGrupp/evo  
 目前支持 TUM KITTI Euroc 等格式
 
+<!--more-->
+
 evo工具提供了3种误差评估方式:
 
 * `evo_ape` -absoulte pose error  

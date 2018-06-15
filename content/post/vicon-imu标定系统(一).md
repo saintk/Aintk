@@ -3,6 +3,8 @@ title: "vicon-imu标定系统"
 tags: ["VIO" ]
 date: "2018-06-05"
 ---
+这篇文章介绍了如何使用vicon系统对imu内参进行标定。
+<!--more-->
 
 ## 1. 基本理念
 一般情况对imu的简单建模

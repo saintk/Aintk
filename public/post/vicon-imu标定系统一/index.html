@@ -16,36 +16,21 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content=" 1. 基本理念 一般情况对imu的简单建模
-$$ X_{m}=X_{t}&#43;X_{b}&#43;X_{n} $$
-其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声
-零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。 因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。
-然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。 因此使用高精度的动作捕获系统vicon来估计这个值，无需多余的工作量。
-2. 理论推导 " />
+  <meta name="description" content="这篇文章介绍了如何使用vicon系统对imu内参进行标定。 " />
 
   
   
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@gohugoio" />
     <meta name="twitter:title" content="vicon-imu标定系统" />
-    <meta name="twitter:description" content=" 1. 基本理念 一般情况对imu的简单建模
-$$ X_{m}=X_{t}&#43;X_{b}&#43;X_{n} $$
-其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声
-零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。 因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。
-然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。 因此使用高精度的动作捕获系统vicon来估计这个值，无需多余的工作量。
-2. 理论推导 " />
+    <meta name="twitter:description" content="这篇文章介绍了如何使用vicon系统对imu内参进行标定。 " />
     <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
   
 
   
   <meta property="og:type" content="article" />
   <meta property="og:title" content="vicon-imu标定系统" />
-  <meta property="og:description" content=" 1. 基本理念 一般情况对imu的简单建模
-$$ X_{m}=X_{t}&#43;X_{b}&#43;X_{n} $$
-其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声
-零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。 因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。
-然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。 因此使用高精度的动作捕获系统vicon来估计这个值，无需多余的工作量。
-2. 理论推导 " />
+  <meta property="og:description" content="这篇文章介绍了如何使用vicon系统对imu内参进行标定。 " />
   <meta property="og:url" content="https://www.aintk.xyz/post/vicon-imu%E6%A0%87%E5%AE%9A%E7%B3%BB%E7%BB%9F%E4%B8%80/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
@@ -248,7 +233,8 @@ $$ X_{m}=X_{t}&#43;X_{b}&#43;X_{n} $$
       <h1 class="post-title">vicon-imu标定系统</h1>
       <p class="post-meta">@Sid Wang · Jun 5, 2018 · 1 min read</p>
     </header>
-    <article class="post-content">
+    <article class="post-content"><p>这篇文章介绍了如何使用vicon系统对imu内参进行标定。
+</p>
 
 <h2 id="1-基本理念">1. 基本理念</h2>
 
@@ -264,8 +250,7 @@ $$ X_{m}=X_{t}&#43;X_{b}&#43;X_{n} $$
 <p>然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。
 因此使用高精度的动作捕获系统vicon来估计这个值，无需多余的工作量。</p>
 
-<h2 id="2-理论推导">2. 理论推导</h2>
-</article>
+<h2 id="2-理论推导">2. 理论推导</h2></article>
     <footer class="post-footer">
       
       <ul class="post-tags">

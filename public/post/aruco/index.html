@@ -16,66 +16,21 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content="1. 配置安装 ArUco库下载:
-https://sourceforge.net/projects/aruco/files/
-这里我使用的是3.0.10版本,按照readme安装。(make install)
-编译安装MarkerMapper:
-https://sourceforge.net/p/markermapper/activity/?page=0&amp;amp;limit=100#5addf1323241d20a481f2a02
-这里我使用的是1.0.12版本，按照readme安装。(make install)
-2. 采集数据并构图 参照Marker_Mapper中的Readme文件，执行一下命令:
-./utils/mapper_from_video video.avi camera.yml 0.1 -out markerset -d dict  其中为拍摄有marker的视频，camera.yml为相机内参，0.1为相关的tag大小， video.avi:拍摄有marker的视频.
-camera.yml:相机内参.
-0.1：为marker的大小，按实际情况给定.
--o map: 生成的文件. -d : 制定使用的marker字典，按照所使用的marker指定，有ARUCO_MIP_16h3 ARUCO_MIP_25h7 ARUCO_MIP_36h12等.
-如图所示: 我们所用的dict为ARUCO_MIP_36h12 最后我们将得到markerset.yml以及相应的pcd文件,如果结果markerset的结果不好请检查相机标定参数和marker的参数.
-3. 使用api获取当前位置 通过调用aruco的相关接口，来获取当前位置. 有四个需要定义的接口:
- CameraParameters TheCameraParameters; // 相机内参 MarkerMap TheMarkerMapConfig; // 地图参数 MarkerDetector TheMarkerDetector; // Marker检测 MarkerMapPoseTracker TheMSPoseTracker; // 位置跟踪接口  具体可以使用也很简单，可以参照官网的接口.
-对每一帧图像可以通过如下操作获得相机位姿.
-//读取marker_map和相机参数  TheMarkerMapConfig.readFromFile(inputArucoMapPath); TheCameraParameters.readFromXMLFile(cameraParamPath); //获取建图所使用的字典  TheMarkerDetector.setDictionary(TheMarkerMapConfig.getDictionary()); //获取marker的size  if (TheMarkerMapConfig." />
+  <meta name="description" content="这篇文章介绍了如何使用ArUco库进行定位。 " />
 
   
   
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@gohugoio" />
     <meta name="twitter:title" content="使用ArUco定位" />
-    <meta name="twitter:description" content="1. 配置安装 ArUco库下载:
-https://sourceforge.net/projects/aruco/files/
-这里我使用的是3.0.10版本,按照readme安装。(make install)
-编译安装MarkerMapper:
-https://sourceforge.net/p/markermapper/activity/?page=0&amp;amp;limit=100#5addf1323241d20a481f2a02
-这里我使用的是1.0.12版本，按照readme安装。(make install)
-2. 采集数据并构图 参照Marker_Mapper中的Readme文件，执行一下命令:
-./utils/mapper_from_video video.avi camera.yml 0.1 -out markerset -d dict  其中为拍摄有marker的视频，camera.yml为相机内参，0.1为相关的tag大小， video.avi:拍摄有marker的视频.
-camera.yml:相机内参.
-0.1：为marker的大小，按实际情况给定.
--o map: 生成的文件. -d : 制定使用的marker字典，按照所使用的marker指定，有ARUCO_MIP_16h3 ARUCO_MIP_25h7 ARUCO_MIP_36h12等.
-如图所示: 我们所用的dict为ARUCO_MIP_36h12 最后我们将得到markerset.yml以及相应的pcd文件,如果结果markerset的结果不好请检查相机标定参数和marker的参数.
-3. 使用api获取当前位置 通过调用aruco的相关接口，来获取当前位置. 有四个需要定义的接口:
- CameraParameters TheCameraParameters; // 相机内参 MarkerMap TheMarkerMapConfig; // 地图参数 MarkerDetector TheMarkerDetector; // Marker检测 MarkerMapPoseTracker TheMSPoseTracker; // 位置跟踪接口  具体可以使用也很简单，可以参照官网的接口.
-对每一帧图像可以通过如下操作获得相机位姿.
-//读取marker_map和相机参数  TheMarkerMapConfig.readFromFile(inputArucoMapPath); TheCameraParameters.readFromXMLFile(cameraParamPath); //获取建图所使用的字典  TheMarkerDetector.setDictionary(TheMarkerMapConfig.getDictionary()); //获取marker的size  if (TheMarkerMapConfig." />
+    <meta name="twitter:description" content="这篇文章介绍了如何使用ArUco库进行定位。 " />
     <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
   
 
   
   <meta property="og:type" content="article" />
   <meta property="og:title" content="使用ArUco定位" />
-  <meta property="og:description" content="1. 配置安装 ArUco库下载:
-https://sourceforge.net/projects/aruco/files/
-这里我使用的是3.0.10版本,按照readme安装。(make install)
-编译安装MarkerMapper:
-https://sourceforge.net/p/markermapper/activity/?page=0&amp;amp;limit=100#5addf1323241d20a481f2a02
-这里我使用的是1.0.12版本，按照readme安装。(make install)
-2. 采集数据并构图 参照Marker_Mapper中的Readme文件，执行一下命令:
-./utils/mapper_from_video video.avi camera.yml 0.1 -out markerset -d dict  其中为拍摄有marker的视频，camera.yml为相机内参，0.1为相关的tag大小， video.avi:拍摄有marker的视频.
-camera.yml:相机内参.
-0.1：为marker的大小，按实际情况给定.
--o map: 生成的文件. -d : 制定使用的marker字典，按照所使用的marker指定，有ARUCO_MIP_16h3 ARUCO_MIP_25h7 ARUCO_MIP_36h12等.
-如图所示: 我们所用的dict为ARUCO_MIP_36h12 最后我们将得到markerset.yml以及相应的pcd文件,如果结果markerset的结果不好请检查相机标定参数和marker的参数.
-3. 使用api获取当前位置 通过调用aruco的相关接口，来获取当前位置. 有四个需要定义的接口:
- CameraParameters TheCameraParameters; // 相机内参 MarkerMap TheMarkerMapConfig; // 地图参数 MarkerDetector TheMarkerDetector; // Marker检测 MarkerMapPoseTracker TheMSPoseTracker; // 位置跟踪接口  具体可以使用也很简单，可以参照官网的接口.
-对每一帧图像可以通过如下操作获得相机位姿.
-//读取marker_map和相机参数  TheMarkerMapConfig.readFromFile(inputArucoMapPath); TheCameraParameters.readFromXMLFile(cameraParamPath); //获取建图所使用的字典  TheMarkerDetector.setDictionary(TheMarkerMapConfig.getDictionary()); //获取marker的size  if (TheMarkerMapConfig." />
+  <meta property="og:description" content="这篇文章介绍了如何使用ArUco库进行定位。 " />
   <meta property="og:url" content="https://www.aintk.xyz/post/aruco/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
@@ -278,7 +233,8 @@ camera.yml:相机内参.
       <h1 class="post-title">使用ArUco定位</h1>
       <p class="post-meta">@Sid Wang · Jun 10, 2018 · 1 min read</p>
     </header>
-    <article class="post-content">
+    <article class="post-content"><p>这篇文章介绍了如何使用ArUco库进行定位。
+</p>
 
 <h2 id="1-配置安装">1. 配置安装</h2>
 
@@ -341,8 +297,7 @@ camera.yml:相机内参.<br />
 </span><span style="color:#75715e"></span>            cv<span style="color:#f92672">::</span>Mat T <span style="color:#f92672">=</span> TheMSPoseTracker.getRTMatrix(); 
     }
 </code></pre></div>
-<p>实测精度可以达到厘米级。</p>
-</article>
+<p>实测精度可以达到厘米级。</p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
