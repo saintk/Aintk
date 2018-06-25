@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Wed, 20 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.aintk.xyz/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>拯救linux</title>
+      <link>https://www.aintk.xyz/post/%E6%8B%AF%E6%95%91linux/</link>
+      <pubDate>Mon, 25 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/%E6%8B%AF%E6%95%91linux/</guid>
+      <description>&lt;h2 id=&#34;拯救linux&#34;&gt;拯救Linux&lt;/h2&gt;
+
+&lt;p&gt;昨天晚上经历了绝望的4个小时,linux系统找不到，数据面临丢失危机。
+&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>非线性最小二乘</title>
