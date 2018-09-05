@@ -52,12 +52,47 @@
     </item>
     
     <item>
+      <title>VScode代码风格设置</title>
+      <link>https://www.aintk.xyz/post/vscode%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE/</link>
+      <pubDate>Wed, 05 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/vscode%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE/</guid>
+      <description>&lt;p&gt;这一段时间用VScode，各方面都挺好用的。但是，有一点让我难受，格式化代码时，花括号的自动换行，没法忍啊！&lt;br /&gt;
+
+em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，类似这个：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>OpenMP并行计算</title>
+      <link>https://www.aintk.xyz/post/openmp%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 21 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/openmp%E4%BD%BF%E7%94%A8/</guid>
+      <description>&lt;p&gt;最近在写工程的时候，涉及到了一些cpu并行计算的部分，简单的了解一下如何使用openmp进行cpu并行计算.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>关于更新</title>
       <link>https://www.aintk.xyz/post/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B0/</link>
       <pubDate>Mon, 09 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>https://www.aintk.xyz/post/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B0/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux系统挂载</title>
+      <link>https://www.aintk.xyz/post/linux%E7%A1%AC%E7%9B%98%E6%8C%82%E8%BD%BD/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/linux%E7%A1%AC%E7%9B%98%E6%8C%82%E8%BD%BD/</guid>
+      <description>&lt;p&gt;各位看官，在上次成功拯救linux后，我发现系统启动速度大幅度下降，原本秒开的情况，现在至少需要等30秒，这让我有点心浮气躁。&lt;br /&gt;
+今天我了解到了硬盘挂载的玄妙，感觉又可以尝试一波了。
+
+起因在于今天跑一个软件，之前能跑，现在跑不了，发现原因居然是电脑空间不够。&lt;br /&gt;
+另外发现电脑启动速度跟之前相比慢了很多，看到有些人说是swap分区没有正确挂载的原因。&lt;/p&gt;</description>
     </item>
     
     <item>

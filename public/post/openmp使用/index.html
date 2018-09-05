@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>非线性最小二乘</title>
+  <title>OpenMP并行计算</title>
 
   
   
@@ -16,22 +16,28 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content="高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。 这里介绍细节的非线性最小二乘的方法。 " />
+  <meta name="description" content="最近在写工程的时候，涉及到了一些cpu并行计算的部分，简单的了解一下如何使用openmp进行cpu并行计算.
+
+" />
 
   
   
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="非线性最小二乘" />
-    <meta name="twitter:description" content="高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。 这里介绍细节的非线性最小二乘的方法。 " />
+    <meta name="twitter:title" content="OpenMP并行计算" />
+    <meta name="twitter:description" content="最近在写工程的时候，涉及到了一些cpu并行计算的部分，简单的了解一下如何使用openmp进行cpu并行计算.
+
+" />
     <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
   
 
   
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="非线性最小二乘" />
-  <meta property="og:description" content="高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。 这里介绍细节的非线性最小二乘的方法。 " />
-  <meta property="og:url" content="https://www.aintk.xyz/post/%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/" />
+  <meta property="og:title" content="OpenMP并行计算" />
+  <meta property="og:description" content="最近在写工程的时候，涉及到了一些cpu并行计算的部分，简单的了解一下如何使用openmp进行cpu并行计算.
+
+" />
+  <meta property="og:url" content="https://www.aintk.xyz/post/openmp%E4%BD%BF%E7%94%A8/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
 
@@ -40,7 +46,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://www.aintk.xyz/post/%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/" />
+<link rel="canonical" href="https://www.aintk.xyz/post/openmp%E4%BD%BF%E7%94%A8/" />
 <link rel="alternative" href="https://www.aintk.xyz/index.xml" title="Aintk" type="application/atom+xml" />
 
 
@@ -230,46 +236,43 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">非线性最小二乘</h1>
-      <p class="post-meta">@Sid Wang · Jun 20, 2018 · 1 min read</p>
+      <h1 class="post-title">OpenMP并行计算</h1>
+      <p class="post-meta">@Sid Wang · Jul 21, 2018 · 1 min read</p>
     </header>
-    <article class="post-content"><p>高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。
-这里介绍细节的非线性最小二乘的方法。
-</p>
+    <article class="post-content"><p>最近在写工程的时候，涉及到了一些cpu并行计算的部分，简单的了解一下如何使用openmp进行cpu并行计算.</p>
 
-<h2 id="1-最小二乘问题">1. 最小二乘问题</h2>
+<p></p>
 
-<p>最简单的最小二乘问题：<br />
-$$ \underset{x}{min}\frac{1}{2}||f(x)||_{2}^{2} $$
-自变量 $x\epsilon\mathbb{R}^{n}$ ，f是任意非线性函数，设它为m维:$f(x)\epsilon\mathbb{R}^{m}$。<br />
-如果f的形式很简单，问题可能可以用解析形式求解，即令目标函数的导数为零，进而求得x的最优值。但实际应用中并不方便使用这种方法，更多的是使用迭代逼近的方法取找到导数为0的点。</p>
+<h2 id="一-什么是openmp">一、什么是OpenMP？</h2>
 
-<h3 id="1-1-梯度下降法">1.1 梯度下降法</h3>
+<p>OpenMP 即 Open MultiProcessing. 它并不是一个简单的函数库，而是一个诸多编译器支持的框架，在编译时加入 -fopenmp 即可直接使用。
+OpenMP提供了对并行算法的高层的抽象描述，通过在code中加入 pargma 来表明自己的意图，告知编译器将这部分程序进行并行化，并在必要之处加入同步互斥和通信。<br />
+但这也限制了它不适合复杂的线程间同步和互斥的场景。</p>
 
-<p>将目标函数 $||f(x)||^{2}$在x处进行taylor展开：
-$$||f(x+\Delta{x})||^{2} \thickapprox ||f(x)||^{2} + J(x)\Delta{x} + \frac{1}{2}\Delta{x}^{T}H\Delta{x}$$<br />
-J是目标函数$||f(x)||^{2}$关于x的导数，即jacobian矩阵，H为Hssian矩阵。<br />
-如果仅保留一阶项，整理有：
-$$||f(x)||^{2} - ||f(x+\Delta{x})||^{2} =  -J(x)\Delta{x}$$<br />
-在$\Delta{x}$是下降的方向的前提下，即$J(x)\Delta{x}&lt;0$，就可以把右边看作是目标函数从x到$x+\Delta{x}$下降的量。</p>
+<h2 id="二-使用">二、使用</h2>
 
-<p>进一步，$\Delta{x}$取多少才能使下降量尽可能大？
-首先引入一个步长参数$\lambda$来控制学习率，而限定$\Delta{x}$为单位长度，则显然，当取$\lambda&gt;0$，$\Delta{x}$与-J(x)同向时，右式最大。</p>
+<p>基本用法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;omp.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+<span style="color:#75715e">#pragma omp parallel for
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">char</span> i <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span>; i <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;z&#39;</span>; i<span style="color:#f92672">++</span>)
+        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
 
-<p>即结论是函数沿负梯度方向下降最快，即: $\Delta{x^{*}} = -J^{T}(x)$ ，而具体下降的多少，则有步长$\lambda$来确定。</p>
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div>
+<p>使用openmp对for循环的任务进行切分，若电脑有4核，则for循环会并行的切分成4部分，分别计算。</p>
 
-<hr />
-
-<h2 id="1-2-牛顿法">1.2 牛顿法</h2>
-
-<p>&mdash; 未完待续 &mdash;</p></article>
+<p>就一句话，是不是很简单？<br />
+但里面也会遇到一些问题，比如各线程的数据依赖、对公共数据进行修改等等，都有可能出现问题。 这些问题在设计时要认真考量。</p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
         
-          <li><a href="https://www.aintk.xyz/tags/vio"><span class="tag">VIO</span></a></li>
-        
-          <li><a href="https://www.aintk.xyz/tags/slam"><span class="tag">SLAM</span></a></li>
+          <li><a href="https://www.aintk.xyz/tags/c/c&#43;&#43;"><span class="tag">C/C&#43;&#43;</span></a></li>
         
       </ul>
       

@@ -22,6 +22,19 @@
     </item>
     
     <item>
+      <title>Linux系统挂载</title>
+      <link>https://www.aintk.xyz/post/linux%E7%A1%AC%E7%9B%98%E6%8C%82%E8%BD%BD/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/linux%E7%A1%AC%E7%9B%98%E6%8C%82%E8%BD%BD/</guid>
+      <description>&lt;p&gt;各位看官，在上次成功拯救linux后，我发现系统启动速度大幅度下降，原本秒开的情况，现在至少需要等30秒，这让我有点心浮气躁。&lt;br /&gt;
+今天我了解到了硬盘挂载的玄妙，感觉又可以尝试一波了。
+
+起因在于今天跑一个软件，之前能跑，现在跑不了，发现原因居然是电脑空间不够。&lt;br /&gt;
+另外发现电脑启动速度跟之前相比慢了很多，看到有些人说是swap分区没有正确挂载的原因。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>拯救大兵linux</title>
       <link>https://www.aintk.xyz/post/%E6%8B%AF%E6%95%91linux/</link>
       <pubDate>Mon, 25 Jun 2018 00:00:00 +0000</pubDate>

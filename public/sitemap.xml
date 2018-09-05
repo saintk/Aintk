@@ -18,8 +18,23 @@
   </url>
   
   <url>
+    <loc>https://www.aintk.xyz/post/vscode%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE/</loc>
+    <lastmod>2018-09-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.aintk.xyz/post/openmp%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2018-07-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.aintk.xyz/post/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B0/</loc>
     <lastmod>2018-07-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.aintk.xyz/post/linux%E7%A1%AC%E7%9B%98%E6%8C%82%E8%BD%BD/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -59,13 +74,19 @@
   </url>
   
   <url>
+    <loc>https://www.aintk.xyz/tags/c/c&#43;&#43;/</loc>
+    <lastmod>2018-09-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.aintk.xyz/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.aintk.xyz/post/</loc>
-    <lastmod>2018-07-09T00:00:00+00:00</lastmod>
+    <lastmod>2018-09-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -77,7 +98,7 @@
   
   <url>
     <loc>https://www.aintk.xyz/tags/</loc>
-    <lastmod>2018-06-20T00:00:00+00:00</lastmod>
+    <lastmod>2018-09-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
