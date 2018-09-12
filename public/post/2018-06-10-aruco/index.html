@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>使用ArUco定位</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="Sid Wang" />
+  <meta name="description" content="这篇文章介绍了如何使用ArUco库进行定位。 " />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="使用ArUco定位" />
+    <meta name="twitter:description" content="这篇文章介绍了如何使用ArUco库进行定位。 " />
+    <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="使用ArUco定位" />
+  <meta property="og:description" content="这篇文章介绍了如何使用ArUco库进行定位。 " />
+  <meta property="og:url" content="https://www.aintk.xyz/post/2018-06-10-aruco/" />
+  <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://www.aintk.xyz/post/2018-06-10-aruco/" />
+<link rel="alternative" href="https://www.aintk.xyz/index.xml" title="Aintk" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc" />
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587" />
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Aintk" />
+<meta name="msapplication-tooltip" content="Aintk" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://www.aintk.xyz/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.aintk.xyz/img/dragon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.aintk.xyz/img/dragon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://www.aintk.xyz/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://www.aintk.xyz/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://www.aintk.xyz/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://www.aintk.xyz/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://www.aintk.xyz/img/tribal-graffiti-alphabet-s.jpg" alt="Avatar">
+  
+  <h2 class="title">Aintk</h2>
+  
+  <p class="subtitle">~ 功不唐捐 玉汝于成 ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/home/">Home</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/post/">Posts</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/links/">Links</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:aintk@hotmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/saintk" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://www.aintk.xyz/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//space.bilibili.com/4471633" title="Bilibili"><span class="icon icon-bilibili"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="https://www.aintk.xyz/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">使用ArUco定位</h1>
+      <p class="post-meta">@Sid Wang · Jun 10, 2018 · 1 min read</p>
+    </header>
+    <article class="post-content"><p>这篇文章介绍了如何使用ArUco库进行定位。
+</p>
+
+<h2 id="1-配置安装">1. 配置安装</h2>
+
+<p>ArUco库下载:<br />
+<a href="https://sourceforge.net/projects/aruco/files/">https://sourceforge.net/projects/aruco/files/</a><br />
+这里我使用的是3.0.10版本,按照readme安装。(make install)</p>
+
+<p>编译安装MarkerMapper:<br />
+<a href="https://sourceforge.net/p/markermapper/activity/?page=0&amp;limit=100#5addf1323241d20a481f2a02">https://sourceforge.net/p/markermapper/activity/?page=0&amp;limit=100#5addf1323241d20a481f2a02</a><br />
+这里我使用的是1.0.12版本，按照readme安装。(make install)</p>
+
+<h2 id="2-采集数据并构图">2. 采集数据并构图</h2>
+
+<p>参照Marker_Mapper中的Readme文件，执行一下命令:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">.<span style="color:#f92672">/</span>utils<span style="color:#f92672">/</span>mapper_from_video video.avi camera.yml <span style="color:#ae81ff">0.1</span> <span style="color:#f92672">-</span>out markerset <span style="color:#f92672">-</span>d dict
+</code></pre></div>
+<p>其中为拍摄有marker的视频，camera.yml为相机内参，0.1为相关的tag大小，
+video.avi:拍摄有marker的视频.<br />
+camera.yml:相机内参.<br />
+0.1：为marker的大小，按实际情况给定.<br />
+-o map: 生成的文件.
+-d <dict>: 制定使用的marker字典，按照所使用的marker指定，有ARUCO_MIP_16h3 ARUCO_MIP_25h7 ARUCO_MIP_36h12等.<br />
+<img src="https://www.aintk.xyz/media/posts/ArUco/arUco_marker_1.png" alt="ArUco采集视频" />
+如图所示: 我们所用的dict为ARUCO_MIP_36h12
+<img src="https://www.aintk.xyz/media/posts/ArUco/map_viewer_screenshot_10.06.2018.png" alt="map_set" />
+最后我们将得到markerset.yml以及相应的pcd文件,如果结果markerset的结果不好请检查相机标定参数和marker的参数.</p>
+
+<h2 id="3-使用api获取当前位置">3. 使用api获取当前位置</h2>
+
+<p>通过调用aruco的相关接口，来获取当前位置.
+有四个需要定义的接口:</p>
+
+<ul>
+<li>CameraParameters TheCameraParameters;     // 相机内参</li>
+<li>MarkerMap TheMarkerMapConfig;             // 地图参数</li>
+<li>MarkerDetector TheMarkerDetector;         // Marker检测</li>
+<li>MarkerMapPoseTracker TheMSPoseTracker;    // 位置跟踪接口</li>
+</ul>
+
+<p>具体可以使用也很简单，可以参照官网的接口.<br />
+对每一帧图像可以通过如下操作获得相机位姿.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    <span style="color:#75715e">//读取marker_map和相机参数
+</span><span style="color:#75715e"></span>    TheMarkerMapConfig.readFromFile(inputArucoMapPath); 
+    TheCameraParameters.readFromXMLFile(cameraParamPath); 
+    <span style="color:#75715e">//获取建图所使用的字典
+</span><span style="color:#75715e"></span>    TheMarkerDetector.setDictionary(TheMarkerMapConfig.getDictionary()); 
+    <span style="color:#75715e">//获取marker的size
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (TheMarkerMapConfig.isExpressedInPixels() <span style="color:#f92672">&amp;&amp;</span> TheMarkerSize <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
+        TheMarkerMapConfig <span style="color:#f92672">=</span> TheMarkerMapConfig.convertToMeters(TheMarkerSize);
+    <span style="color:#66d9ef">if</span> (TheCameraParameters.isValid() <span style="color:#f92672">&amp;&amp;</span> TheMarkerMapConfig.isExpressedInMeters()) {
+        TheMSPoseTracker.setParams(TheCameraParameters, TheMarkerMapConfig);
+        TheMarkerSize <span style="color:#f92672">=</span> cv<span style="color:#f92672">::</span>norm(TheMarkerMapConfig[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> TheMarkerMapConfig[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>]);
+    }
+
+    <span style="color:#75715e">//开始跟踪
+</span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>aruco<span style="color:#f92672">::</span>Marker<span style="color:#f92672">&gt;</span> detectedMarkers <span style="color:#f92672">=</span> TheMarkerDetector.detect(TheInputImage);
+    <span style="color:#66d9ef">if</span> (TheMSPoseTracker.isValid()) {
+        <span style="color:#66d9ef">if</span> (TheMSPoseTracker.estimatePose(detectedMarkers)) 
+            <span style="color:#75715e">//获得相机当前的位姿
+</span><span style="color:#75715e"></span>            cv<span style="color:#f92672">::</span>Mat T <span style="color:#f92672">=</span> TheMSPoseTracker.getRTMatrix(); 
+    }
+</code></pre></div>
+<p>实测精度可以达到厘米级。</p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://www.aintk.xyz/tags/vio"><span class="tag">VIO</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aintk" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 Aintk</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://www.aintk.xyz/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-XXXXXXXX-X', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>

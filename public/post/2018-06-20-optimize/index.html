@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tags | Aintk
-</title>
+  <title>非线性最小二乘</title>
 
   
   
@@ -18,20 +16,22 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content="王兆圣的个人博客" />
+  <meta name="description" content="高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。 这里介绍细节的非线性最小二乘的方法。 " />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@gohugoio" />
-  <meta name="twitter:title" content="Aintk" />
-  <meta name="twitter:description" content="王兆圣的个人博客" />
-  <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="非线性最小二乘" />
+    <meta name="twitter:description" content="高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。 这里介绍细节的非线性最小二乘的方法。 " />
+    <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
 
   
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Aintk" />
-  <meta property="og:description" content="王兆圣的个人博客" />
-  <meta property="og:url" content="https://www.aintk.xyz/tags/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="非线性最小二乘" />
+  <meta property="og:description" content="高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。 这里介绍细节的非线性最小二乘的方法。 " />
+  <meta property="og:url" content="https://www.aintk.xyz/post/2018-06-20-optimize/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
 
@@ -40,7 +40,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://www.aintk.xyz/tags/" />
+<link rel="canonical" href="https://www.aintk.xyz/post/2018-06-20-optimize/" />
 <link rel="alternative" href="https://www.aintk.xyz/index.xml" title="Aintk" type="application/atom+xml" />
 
 
@@ -104,6 +104,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -138,8 +142,6 @@
           </li>
       
         <li class="menu-item
-            
-              is-active
             
             
             ">
@@ -226,26 +228,78 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
+  <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+      <h1 class="post-title">非线性最小二乘</h1>
+      <p class="post-meta">@Sid Wang · Jun 20, 2018 · 1 min read</p>
     </header>
-    <div class="tags-cloud">
+    <article class="post-content"><p>高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。
+这里介绍细节的非线性最小二乘的方法。
+</p>
+
+<h2 id="1-最小二乘问题">1. 最小二乘问题</h2>
+
+<p>最简单的最小二乘问题：<br />
+$$ \underset{x}{min}\frac{1}{2}||f(x)||_{2}^{2} $$
+自变量 $x\epsilon\mathbb{R}^{n}$ ，f是任意非线性函数，设它为m维:$f(x)\epsilon\mathbb{R}^{m}$。<br />
+如果f的形式很简单，问题可能可以用解析形式求解，即令目标函数的导数为零，进而求得x的最优值。但实际应用中并不方便使用这种方法，更多的是使用迭代逼近的方法取找到导数为0的点。</p>
+
+<h3 id="1-1-梯度下降法">1.1 梯度下降法</h3>
+
+<p>将目标函数 $||f(x)||^{2}$在x处进行taylor展开：
+$$||f(x+\Delta{x})||^{2} \thickapprox ||f(x)||^{2} + J(x)\Delta{x} + \frac{1}{2}\Delta{x}^{T}H\Delta{x}$$<br />
+J是目标函数$||f(x)||^{2}$关于x的导数，即jacobian矩阵，H为Hssian矩阵。<br />
+如果仅保留一阶项，整理有：
+$$||f(x)||^{2} - ||f(x+\Delta{x})||^{2} =  -J(x)\Delta{x}$$<br />
+在$\Delta{x}$是下降的方向的前提下，即$J(x)\Delta{x}&lt;0$，就可以把右边看作是目标函数从x到$x+\Delta{x}$下降的量。</p>
+
+<p>进一步，$\Delta{x}$取多少才能使下降量尽可能大？
+首先引入一个步长参数$\lambda$来控制学习率，而限定$\Delta{x}$为单位长度，则显然，当取$\lambda&gt;0$，$\Delta{x}$与-J(x)同向时，右式最大。</p>
+
+<p>即结论是函数沿负梯度方向下降最快，即: $\Delta{x^{*}} = -J^{T}(x)$ ，而具体下降的多少，则有步长$\lambda$来确定。</p>
+
+<hr />
+
+<h2 id="1-2-牛顿法">1.2 牛顿法</h2>
+
+<p>&mdash; 未完待续 &mdash;</p></article>
+    <footer class="post-footer">
       
-      
+      <ul class="post-tags">
         
-        <a href="https://www.aintk.xyz/tags/vio/" class="tag-xxl">vio</a>
-      
+          <li><a href="https://www.aintk.xyz/tags/vio"><span class="tag">VIO</span></a></li>
         
-        <a href="https://www.aintk.xyz/tags/%E6%9D%82%E8%B0%88/" class="tag-l">杂谈</a>
-      
+          <li><a href="https://www.aintk.xyz/tags/slam"><span class="tag">SLAM</span></a></li>
         
-        <a href="https://www.aintk.xyz/tags/slam/" class="tag-xxl">slam</a>
+      </ul>
       
-        
-        <a href="https://www.aintk.xyz/tags/c/c&#43;&#43;/" class="tag-m">c/c&#43;&#43;</a>
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aintk" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
-    </div>
+    
   </section>
   <footer class="site-footer">
   <p>© 2017-2018 Aintk</p>

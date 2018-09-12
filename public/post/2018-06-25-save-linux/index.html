@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tags | Aintk
-</title>
+  <title>拯救大兵linux</title>
 
   
   
@@ -18,20 +16,25 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content="王兆圣的个人博客" />
+  <meta name="description" content="拯救大兵Linux 昨天晚上经历了绝望的4个小时,linux系统生死未卜，所有数据了无音信。
+在生死存亡时刻，迅速展开了一场拯救大兵Linux的行动！ " />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@gohugoio" />
-  <meta name="twitter:title" content="Aintk" />
-  <meta name="twitter:description" content="王兆圣的个人博客" />
-  <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="拯救大兵linux" />
+    <meta name="twitter:description" content="拯救大兵Linux 昨天晚上经历了绝望的4个小时,linux系统生死未卜，所有数据了无音信。
+在生死存亡时刻，迅速展开了一场拯救大兵Linux的行动！ " />
+    <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
 
   
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Aintk" />
-  <meta property="og:description" content="王兆圣的个人博客" />
-  <meta property="og:url" content="https://www.aintk.xyz/tags/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="拯救大兵linux" />
+  <meta property="og:description" content="拯救大兵Linux 昨天晚上经历了绝望的4个小时,linux系统生死未卜，所有数据了无音信。
+在生死存亡时刻，迅速展开了一场拯救大兵Linux的行动！ " />
+  <meta property="og:url" content="https://www.aintk.xyz/post/2018-06-25-save-linux/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
 
@@ -40,7 +43,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://www.aintk.xyz/tags/" />
+<link rel="canonical" href="https://www.aintk.xyz/post/2018-06-25-save-linux/" />
 <link rel="alternative" href="https://www.aintk.xyz/index.xml" title="Aintk" type="application/atom+xml" />
 
 
@@ -104,6 +107,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -138,8 +145,6 @@
           </li>
       
         <li class="menu-item
-            
-              is-active
             
             
             ">
@@ -226,26 +231,98 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
+  <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+      <h1 class="post-title">拯救大兵linux</h1>
+      <p class="post-meta">@Sid Wang · Jun 25, 2018 · 1 min read</p>
     </header>
-    <div class="tags-cloud">
+    <article class="post-content"><h2 id="拯救大兵linux">拯救大兵Linux</h2>
+
+<p>昨天晚上经历了绝望的4个小时,linux系统生死未卜，所有数据了无音信。<br />
+在生死存亡时刻，迅速展开了一场拯救大兵Linux的行动！
+</p>
+
+<p>我的电脑装的是win10+ubuntu双系统，两个都装在了同一块256G的SSD上。<br />
+一开始ubuntu只分了50G用来装软件，写代码，但长时间的使用发现完全不够用啊，所以打算再分10G给它，结果噩梦就开始了。</p>
+
+<hr />
+
+<h3 id="前情提要">前情提要</h3>
+
+<p>说时迟那时快，只见我鼠标灵动的一滑，就将boot引导区移动到了新分配的10G空间前面，然后点击了提交修改。<br />
+关机！ 准备进入Linux！</p>
+
+<h3 id="悲剧降临">悲剧降临</h3>
+
+<h4 id="第一节-终焉のlinux">第一节 终焉のlinux</h4>
+
+<p>在熟悉的败家之眼LOGO闪烁之后，进入的不再是选择启动项的启动菜单，只剩下GRUB-&gt;和一个孤零零闪烁的光标。<br />
+GG，啥都没有了，进不去系统了<br />
+查了很多如何使用GRUB进系统，利用 ls (hd1,xxx)查看了boot分区里的内容，/boot里什么都没有，没有任何vm-*的内核文件，凉凉，彻底进不去系统了。</p>
+
+<h4 id="第二节-末路のdata">第二节 末路のData</h4>
+
+<p>万幸的是进入bios，还可以找到windows的启动项，毕竟windows的引导区在硬盘最前面，我没有进行任何操作。<br />
+初步判断Linux的引导区被搞丢了，想着先把数据搞出来，毕竟半年来的所有工作文件，代码都在里面，而windows是无法访问的，因为那部分是ext4文件系统，windows显示的直接就是未分配的硬盘空间。</p>
+
+<p>想到一个方法就是通过usb挂载一个linux系统，然后去查看这部分空间。 马上就区做，但结果却令人蛋碎，仍然是未分配的空间，凉了凉了，感觉找不回来了。</p>
+
+<p>脑子一片空白，我日，这找不回来就凉透了啊。系统就不指望了，能把文档找回来也行啊！</p>
+
+<h4 id="第三节-软件の野望">第三节 软件の野望</h4>
+
+<p>那部分未分配的空间已经不敢操作，任何操作都不敢使用了。。。<br />
+遇事不决找淘宝，上淘宝找专门恢复数据的，聊了一会觉得，em&hellip;我都解决不了，可能这群人&hellip;算了，还是自己来把&hellip;</p>
+
+<p>首先我用了国内的一个软件叫diskgenius，它确实给我了一些希望，能够从未分配的空间找到文件，但是名字全是数字，并且按照文件类型分类。<br />
+我本来想，能找回来也行，先copy出来，但突然意识到，它居然没有.c/.cpp等类型，无视了程序员的需求啊！！！ 只能恢复一些pdf，图片,视频等等，没什么用啊！！！</p>
+
+<p>不行，一个软件不行就换一个！ easyRecovery、final data等等，都不行！ 连未分配的空间都操作不了&hellip;</p>
+
+<p>国产软件不行，就找国外的，google一下，em&hellip; minitool，下载试试，我靠！居然可以从未分配的空间中恢复分区 666!!!</p>
+
+<p>666！！！ 让我们敬畏撒旦！！！</p>
+
+<h3 id="吐嘈完毕">吐嘈完毕</h3>
+
+<p>最后，被国产软件的八个大字狠狠教育了一下：</p>
+
+<h4 id="数据无价-谨慎操作">数据无价，谨慎操作</h4></article>
+    <footer class="post-footer">
       
-      
+      <ul class="post-tags">
         
-        <a href="https://www.aintk.xyz/tags/vio/" class="tag-xxl">vio</a>
-      
+          <li><a href="https://www.aintk.xyz/tags/%E6%9D%82%E8%B0%88"><span class="tag">杂谈</span></a></li>
         
-        <a href="https://www.aintk.xyz/tags/%E6%9D%82%E8%B0%88/" class="tag-l">杂谈</a>
+      </ul>
       
-        
-        <a href="https://www.aintk.xyz/tags/slam/" class="tag-xxl">slam</a>
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aintk" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
-        
-        <a href="https://www.aintk.xyz/tags/c/c&#43;&#43;/" class="tag-m">c/c&#43;&#43;</a>
-      
-    </div>
+    
   </section>
   <footer class="site-footer">
   <p>© 2017-2018 Aintk</p>

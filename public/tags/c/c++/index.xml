@@ -14,10 +14,10 @@
     
     <item>
       <title>VScode代码风格设置</title>
-      <link>https://www.aintk.xyz/post/vscode%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE/</link>
+      <link>https://www.aintk.xyz/post/2018-09-05-vscode/</link>
       <pubDate>Wed, 05 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/vscode%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE/</guid>
+      <guid>https://www.aintk.xyz/post/2018-09-05-vscode/</guid>
       <description>&lt;p&gt;这一段时间用VScode，各方面都挺好用的。但是，有一点让我难受，格式化代码时，花括号的自动换行，没法忍啊！&lt;br /&gt;
 
 em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，类似这个：&lt;/p&gt;</description>
@@ -25,10 +25,10 @@ em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，�
     
     <item>
       <title>OpenMP并行计算</title>
-      <link>https://www.aintk.xyz/post/openmp%E4%BD%BF%E7%94%A8/</link>
+      <link>https://www.aintk.xyz/post/2018-07-21-openmp/</link>
       <pubDate>Sat, 21 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/openmp%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://www.aintk.xyz/post/2018-07-21-openmp/</guid>
       <description>&lt;p&gt;最近在写工程的时候，涉及到了一些cpu并行计算的部分，简单的了解一下如何使用openmp进行cpu并行计算.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

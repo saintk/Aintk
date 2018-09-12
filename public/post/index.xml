@@ -7,17 +7,38 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Wed, 05 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.aintk.xyz/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>OKVIS要点速览</title>
+      <link>https://www.aintk.xyz/post/2018-09-12-okvis-paper/</link>
+      <pubDate>Wed, 12 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/2018-09-12-okvis-paper/</guid>
+      <description>&lt;p&gt;主要是策略&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>线性方程组求解</title>
+      <link>https://www.aintk.xyz/post/2018-09-07-zuixiao/</link>
+      <pubDate>Fri, 07 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/2018-09-07-zuixiao/</guid>
+      <description>&lt;p&gt;通常slam中，会用到一些直接线性方程（DLT）求解的方法，现在来探索一下传统线性方程的求解过程。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>VScode代码风格设置</title>
-      <link>https://www.aintk.xyz/post/vscode%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE/</link>
+      <link>https://www.aintk.xyz/post/2018-09-05-vscode/</link>
       <pubDate>Wed, 05 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/vscode%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE/</guid>
+      <guid>https://www.aintk.xyz/post/2018-09-05-vscode/</guid>
       <description>&lt;p&gt;这一段时间用VScode，各方面都挺好用的。但是，有一点让我难受，格式化代码时，花括号的自动换行，没法忍啊！&lt;br /&gt;
 
 em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，类似这个：&lt;/p&gt;</description>
@@ -25,10 +46,10 @@ em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，�
     
     <item>
       <title>OpenMP并行计算</title>
-      <link>https://www.aintk.xyz/post/openmp%E4%BD%BF%E7%94%A8/</link>
+      <link>https://www.aintk.xyz/post/2018-07-21-openmp/</link>
       <pubDate>Sat, 21 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/openmp%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://www.aintk.xyz/post/2018-07-21-openmp/</guid>
       <description>&lt;p&gt;最近在写工程的时候，涉及到了一些cpu并行计算的部分，简单的了解一下如何使用openmp进行cpu并行计算.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -36,19 +57,19 @@ em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，�
     
     <item>
       <title>关于更新</title>
-      <link>https://www.aintk.xyz/post/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B0/</link>
+      <link>https://www.aintk.xyz/post/2018-07-09-aboutupdate/</link>
       <pubDate>Mon, 09 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B0/</guid>
+      <guid>https://www.aintk.xyz/post/2018-07-09-aboutupdate/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Linux系统挂载</title>
-      <link>https://www.aintk.xyz/post/linux%E7%A1%AC%E7%9B%98%E6%8C%82%E8%BD%BD/</link>
+      <link>https://www.aintk.xyz/post/2018-06-27-linux/</link>
       <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/linux%E7%A1%AC%E7%9B%98%E6%8C%82%E8%BD%BD/</guid>
+      <guid>https://www.aintk.xyz/post/2018-06-27-linux/</guid>
       <description>&lt;p&gt;各位看官，在上次成功拯救linux后，我发现系统启动速度大幅度下降，原本秒开的情况，现在至少需要等30秒，这让我有点心浮气躁。&lt;br /&gt;
 今天我了解到了硬盘挂载的玄妙，感觉又可以尝试一波了。
 
@@ -58,10 +79,10 @@ em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，�
     
     <item>
       <title>拯救大兵linux</title>
-      <link>https://www.aintk.xyz/post/%E6%8B%AF%E6%95%91linux/</link>
+      <link>https://www.aintk.xyz/post/2018-06-25-save-linux/</link>
       <pubDate>Mon, 25 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/%E6%8B%AF%E6%95%91linux/</guid>
+      <guid>https://www.aintk.xyz/post/2018-06-25-save-linux/</guid>
       <description>&lt;h2 id=&#34;拯救大兵linux&#34;&gt;拯救大兵Linux&lt;/h2&gt;
 
 &lt;p&gt;昨天晚上经历了绝望的4个小时,linux系统生死未卜，所有数据了无音信。&lt;br /&gt;
@@ -71,10 +92,10 @@ em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，�
     
     <item>
       <title>非线性最小二乘</title>
-      <link>https://www.aintk.xyz/post/%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/</link>
+      <link>https://www.aintk.xyz/post/2018-06-20-optimize/</link>
       <pubDate>Wed, 20 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/</guid>
+      <guid>https://www.aintk.xyz/post/2018-06-20-optimize/</guid>
       <description>&lt;p&gt;高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。
 这里介绍细节的非线性最小二乘的方法。
 &lt;/p&gt;</description>
@@ -82,20 +103,20 @@ em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，�
     
     <item>
       <title>使用ArUco定位</title>
-      <link>https://www.aintk.xyz/post/aruco/</link>
+      <link>https://www.aintk.xyz/post/2018-06-10-aruco/</link>
       <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/aruco/</guid>
+      <guid>https://www.aintk.xyz/post/2018-06-10-aruco/</guid>
       <description>&lt;p&gt;这篇文章介绍了如何使用ArUco库进行定位。
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>使用evo评估VINS-MONO</title>
-      <link>https://www.aintk.xyz/post/evo%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <link>https://www.aintk.xyz/post/2018-06-07-evo/</link>
       <pubDate>Thu, 07 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/evo%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://www.aintk.xyz/post/2018-06-07-evo/</guid>
       <description>&lt;p&gt;EVO工具用于评估SLAM算法在现有数据集上的效果。&lt;br /&gt;
 源码在 &lt;a href=&#34;https://github.com/MichaelGrupp/evo&#34;&gt;https://github.com/MichaelGrupp/evo&lt;/a&gt;&lt;br /&gt;
 目前支持 TUM KITTI Euroc 等格式&lt;/p&gt;
@@ -105,20 +126,20 @@ em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，�
     
     <item>
       <title>vicon-imu标定系统</title>
-      <link>https://www.aintk.xyz/post/vicon-imu%E6%A0%87%E5%AE%9A%E7%B3%BB%E7%BB%9F%E4%B8%80/</link>
+      <link>https://www.aintk.xyz/post/2018-06-05-vicon-imu/</link>
       <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/vicon-imu%E6%A0%87%E5%AE%9A%E7%B3%BB%E7%BB%9F%E4%B8%80/</guid>
+      <guid>https://www.aintk.xyz/post/2018-06-05-vicon-imu/</guid>
       <description>&lt;p&gt;这篇文章介绍了如何使用vicon系统对imu内参进行标定。
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>有点心烦</title>
-      <link>https://www.aintk.xyz/post/%E6%9C%89%E7%82%B9%E5%BF%83%E7%83%A6/</link>
+      <link>https://www.aintk.xyz/post/2018-06-05-xinfan/</link>
       <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/%E6%9C%89%E7%82%B9%E5%BF%83%E7%83%A6/</guid>
+      <guid>https://www.aintk.xyz/post/2018-06-05-xinfan/</guid>
       <description>BUG 调不出啊，狠难受啊！！！ 有点想放弃了！！！
 感觉可以推倒重新来过了。。。</description>
     </item>

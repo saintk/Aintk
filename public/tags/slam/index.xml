@@ -7,17 +7,38 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Wed, 20 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.aintk.xyz/tags/slam/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>OKVIS要点速览</title>
+      <link>https://www.aintk.xyz/post/2018-09-12-okvis-paper/</link>
+      <pubDate>Wed, 12 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/2018-09-12-okvis-paper/</guid>
+      <description>&lt;p&gt;主要是策略&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>线性方程组求解</title>
+      <link>https://www.aintk.xyz/post/2018-09-07-zuixiao/</link>
+      <pubDate>Fri, 07 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/2018-09-07-zuixiao/</guid>
+      <description>&lt;p&gt;通常slam中，会用到一些直接线性方程（DLT）求解的方法，现在来探索一下传统线性方程的求解过程。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>非线性最小二乘</title>
-      <link>https://www.aintk.xyz/post/%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/</link>
+      <link>https://www.aintk.xyz/post/2018-06-20-optimize/</link>
       <pubDate>Wed, 20 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/</guid>
+      <guid>https://www.aintk.xyz/post/2018-06-20-optimize/</guid>
       <description>&lt;p&gt;高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。
 这里介绍细节的非线性最小二乘的方法。
 &lt;/p&gt;</description>

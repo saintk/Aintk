@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tags | Aintk
-</title>
+  <title>vicon-imu标定系统</title>
 
   
   
@@ -18,20 +16,22 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content="王兆圣的个人博客" />
+  <meta name="description" content="这篇文章介绍了如何使用vicon系统对imu内参进行标定。 " />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@gohugoio" />
-  <meta name="twitter:title" content="Aintk" />
-  <meta name="twitter:description" content="王兆圣的个人博客" />
-  <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="vicon-imu标定系统" />
+    <meta name="twitter:description" content="这篇文章介绍了如何使用vicon系统对imu内参进行标定。 " />
+    <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
 
   
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Aintk" />
-  <meta property="og:description" content="王兆圣的个人博客" />
-  <meta property="og:url" content="https://www.aintk.xyz/tags/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="vicon-imu标定系统" />
+  <meta property="og:description" content="这篇文章介绍了如何使用vicon系统对imu内参进行标定。 " />
+  <meta property="og:url" content="https://www.aintk.xyz/post/2018-06-05-vicon-imu/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
 
@@ -40,7 +40,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://www.aintk.xyz/tags/" />
+<link rel="canonical" href="https://www.aintk.xyz/post/2018-06-05-vicon-imu/" />
 <link rel="alternative" href="https://www.aintk.xyz/index.xml" title="Aintk" type="application/atom+xml" />
 
 
@@ -104,6 +104,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -138,8 +142,6 @@
           </li>
       
         <li class="menu-item
-            
-              is-active
             
             
             ">
@@ -226,26 +228,64 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
+  <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+      <h1 class="post-title">vicon-imu标定系统</h1>
+      <p class="post-meta">@Sid Wang · Jun 5, 2018 · 1 min read</p>
     </header>
-    <div class="tags-cloud">
+    <article class="post-content"><p>这篇文章介绍了如何使用vicon系统对imu内参进行标定。
+</p>
+
+<h2 id="1-基本理念">1. 基本理念</h2>
+
+<p>一般情况对imu的简单建模</p>
+
+<p>$$ X_{m}=X_{t}+X_{b}+X_{n} $$</p>
+
+<p>其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声</p>
+
+<p>零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。
+因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。</p>
+
+<p>然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。
+因此使用高精度的动作捕获系统vicon来估计这个值，无需多余的工作量。</p>
+
+<h2 id="2-理论推导">2. 理论推导</h2></article>
+    <footer class="post-footer">
       
-      
+      <ul class="post-tags">
         
-        <a href="https://www.aintk.xyz/tags/vio/" class="tag-xxl">vio</a>
-      
+          <li><a href="https://www.aintk.xyz/tags/vio"><span class="tag">VIO</span></a></li>
         
-        <a href="https://www.aintk.xyz/tags/%E6%9D%82%E8%B0%88/" class="tag-l">杂谈</a>
+      </ul>
       
-        
-        <a href="https://www.aintk.xyz/tags/slam/" class="tag-xxl">slam</a>
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aintk" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
-        
-        <a href="https://www.aintk.xyz/tags/c/c&#43;&#43;/" class="tag-m">c/c&#43;&#43;</a>
-      
-    </div>
+    
   </section>
   <footer class="site-footer">
   <p>© 2017-2018 Aintk</p>

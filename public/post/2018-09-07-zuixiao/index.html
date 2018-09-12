@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tags | Aintk
-</title>
+  <title>线性方程组求解</title>
 
   
   
@@ -18,20 +16,22 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content="王兆圣的个人博客" />
+  <meta name="description" content="通常slam中，会用到一些直接线性方程（DLT）求解的方法，现在来探索一下传统线性方程的求解过程。 " />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@gohugoio" />
-  <meta name="twitter:title" content="Aintk" />
-  <meta name="twitter:description" content="王兆圣的个人博客" />
-  <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="线性方程组求解" />
+    <meta name="twitter:description" content="通常slam中，会用到一些直接线性方程（DLT）求解的方法，现在来探索一下传统线性方程的求解过程。 " />
+    <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
 
   
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Aintk" />
-  <meta property="og:description" content="王兆圣的个人博客" />
-  <meta property="og:url" content="https://www.aintk.xyz/tags/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="线性方程组求解" />
+  <meta property="og:description" content="通常slam中，会用到一些直接线性方程（DLT）求解的方法，现在来探索一下传统线性方程的求解过程。 " />
+  <meta property="og:url" content="https://www.aintk.xyz/post/2018-09-07-zuixiao/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
 
@@ -40,7 +40,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://www.aintk.xyz/tags/" />
+<link rel="canonical" href="https://www.aintk.xyz/post/2018-09-07-zuixiao/" />
 <link rel="alternative" href="https://www.aintk.xyz/index.xml" title="Aintk" type="application/atom+xml" />
 
 
@@ -104,6 +104,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -138,8 +142,6 @@
           </li>
       
         <li class="menu-item
-            
-              is-active
             
             
             ">
@@ -226,26 +228,85 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
+  <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+      <h1 class="post-title">线性方程组求解</h1>
+      <p class="post-meta">@Sid Wang · Sep 7, 2018 · 1 min read</p>
     </header>
-    <div class="tags-cloud">
+    <article class="post-content"><p>通常slam中，会用到一些直接线性方程（DLT）求解的方法，现在来探索一下传统线性方程的求解过程。
+</p>
+
+<p>对于线性方程组，解的判定条件如下:<br />
+1. Ax = 0 总有解，至少有零解</p>
+
+<ol>
+<li><p>Amn x = 0</p>
+
+<ul>
+<li>r(A) = n 只有零解<br /></li>
+<li>r(A) &lt; n 有无穷多解<br /></li>
+</ul></li>
+
+<li><p>Amn x = b</p>
+
+<ul>
+<li>r(A) != r(A|b) 无解<br /></li>
+<li>r(A) = r(A|b) = n 有唯一解<br /></li>
+<li>r(A) = r(A|b) = r &lt; n 有无穷多解<br /></li>
+</ul></li>
+</ol>
+
+<p>通常情况我们总是遇到 Amn x = b 的方程，参数数量和未知数个数有如下关系:<br />
+  * m &lt; n , 未知数大于方程数， 有无穷多解， 存在一个高维的解空间<br />
+  * m = n , 如果A可逆，则有唯一解， 解为 $ x = A^{-1}b$<br />
+  * m &gt; n , 方程数大于未知数， 方程一般没有解， 除非 b 属于 A的列向量组成的子空间</p>
+
+<p>对m&gt;=n 且 r(A) =n 的情况，这种超定方程考虑<strong>最小二乘解</strong>， 通过广义逆的方式，可以进行求解， 具体可以使用SVD、QR分解等方法。<br />
+在x normalize到1的情况下，方程的最小二乘解就是矩阵 A‘A的<strong>最小特征值所对应的特征向量</strong>，具体证明参考相关教科书。</p>
+
+<h2 id="dlt-method">DLT Method</h2>
+
+<p>已知3D点，和对应的图像平面观测，可以通过直接线性变换求解 相机的位姿。
+考虑p 为归一化平面表达，P为对应3D点,则满足:
+$$ sp = [R|t]P $$<br />
+待估计参数为增光矩阵 [R|t]，有12个未知数， 每个特征点提供了2个线性方程， 则有6对匹配即可进行求解。 当点数超过6个的时候，求最小二乘解。</p>
+
+<p>DLT不仅仅是用于SLAM中的pnp求相机位姿，更多的用途是求解相机属性参数和成像模型。</p></article>
+    <footer class="post-footer">
       
-      
+      <ul class="post-tags">
         
-        <a href="https://www.aintk.xyz/tags/vio/" class="tag-xxl">vio</a>
-      
+          <li><a href="https://www.aintk.xyz/tags/slam"><span class="tag">SLAM</span></a></li>
         
-        <a href="https://www.aintk.xyz/tags/%E6%9D%82%E8%B0%88/" class="tag-l">杂谈</a>
+      </ul>
       
-        
-        <a href="https://www.aintk.xyz/tags/slam/" class="tag-xxl">slam</a>
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aintk" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
-        
-        <a href="https://www.aintk.xyz/tags/c/c&#43;&#43;/" class="tag-m">c/c&#43;&#43;</a>
-      
-    </div>
+    
   </section>
   <footer class="site-footer">
   <p>© 2017-2018 Aintk</p>

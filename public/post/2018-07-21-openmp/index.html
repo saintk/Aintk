@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tags | Aintk
-</title>
+  <title>OpenMP并行计算</title>
 
   
   
@@ -18,20 +16,28 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content="王兆圣的个人博客" />
+  <meta name="description" content="最近在写工程的时候，涉及到了一些cpu并行计算的部分，简单的了解一下如何使用openmp进行cpu并行计算.
+
+" />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@gohugoio" />
-  <meta name="twitter:title" content="Aintk" />
-  <meta name="twitter:description" content="王兆圣的个人博客" />
-  <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="OpenMP并行计算" />
+    <meta name="twitter:description" content="最近在写工程的时候，涉及到了一些cpu并行计算的部分，简单的了解一下如何使用openmp进行cpu并行计算.
+
+" />
+    <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
 
   
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Aintk" />
-  <meta property="og:description" content="王兆圣的个人博客" />
-  <meta property="og:url" content="https://www.aintk.xyz/tags/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="OpenMP并行计算" />
+  <meta property="og:description" content="最近在写工程的时候，涉及到了一些cpu并行计算的部分，简单的了解一下如何使用openmp进行cpu并行计算.
+
+" />
+  <meta property="og:url" content="https://www.aintk.xyz/post/2018-07-21-openmp/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
 
@@ -40,7 +46,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://www.aintk.xyz/tags/" />
+<link rel="canonical" href="https://www.aintk.xyz/post/2018-07-21-openmp/" />
 <link rel="alternative" href="https://www.aintk.xyz/index.xml" title="Aintk" type="application/atom+xml" />
 
 
@@ -104,6 +110,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -138,8 +148,6 @@
           </li>
       
         <li class="menu-item
-            
-              is-active
             
             
             ">
@@ -226,26 +234,75 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
+  <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+      <h1 class="post-title">OpenMP并行计算</h1>
+      <p class="post-meta">@Sid Wang · Jul 21, 2018 · 1 min read</p>
     </header>
-    <div class="tags-cloud">
+    <article class="post-content"><p>最近在写工程的时候，涉及到了一些cpu并行计算的部分，简单的了解一下如何使用openmp进行cpu并行计算.</p>
+
+<p></p>
+
+<h2 id="一-什么是openmp">一、什么是OpenMP？</h2>
+
+<p>OpenMP 即 Open MultiProcessing. 它并不是一个简单的函数库，而是一个诸多编译器支持的框架，在编译时加入 -fopenmp 即可直接使用。
+OpenMP提供了对并行算法的高层的抽象描述，通过在code中加入 pargma 来表明自己的意图，告知编译器将这部分程序进行并行化，并在必要之处加入同步互斥和通信。<br />
+但这也限制了它不适合复杂的线程间同步和互斥的场景。</p>
+
+<h2 id="二-使用">二、使用</h2>
+
+<p>基本用法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;omp.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+<span style="color:#75715e">#pragma omp parallel for
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">char</span> i <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span>; i <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;z&#39;</span>; i<span style="color:#f92672">++</span>)
+        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div>
+<p>使用openmp对for循环的任务进行切分，若电脑有4核，则for循环会并行的切分成4部分，分别计算。</p>
+
+<p>就一句话，是不是很简单？<br />
+但里面也会遇到一些问题，比如各线程的数据依赖、对公共数据进行修改等等，都有可能出现问题。 这些问题在设计时要认真考量。</p></article>
+    <footer class="post-footer">
       
-      
+      <ul class="post-tags">
         
-        <a href="https://www.aintk.xyz/tags/vio/" class="tag-xxl">vio</a>
-      
+          <li><a href="https://www.aintk.xyz/tags/c/c&#43;&#43;"><span class="tag">C/C&#43;&#43;</span></a></li>
         
-        <a href="https://www.aintk.xyz/tags/%E6%9D%82%E8%B0%88/" class="tag-l">杂谈</a>
+      </ul>
       
-        
-        <a href="https://www.aintk.xyz/tags/slam/" class="tag-xxl">slam</a>
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aintk" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
-        
-        <a href="https://www.aintk.xyz/tags/c/c&#43;&#43;/" class="tag-m">c/c&#43;&#43;</a>
-      
-    </div>
+    
   </section>
   <footer class="site-footer">
   <p>© 2017-2018 Aintk</p>

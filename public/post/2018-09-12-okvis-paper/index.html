@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tags | Aintk
-</title>
+  <title>OKVIS要点速览</title>
 
   
   
@@ -18,20 +16,28 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content="王兆圣的个人博客" />
+  <meta name="description" content="主要是策略
+
+" />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@gohugoio" />
-  <meta name="twitter:title" content="Aintk" />
-  <meta name="twitter:description" content="王兆圣的个人博客" />
-  <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="OKVIS要点速览" />
+    <meta name="twitter:description" content="主要是策略
+
+" />
+    <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
 
   
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Aintk" />
-  <meta property="og:description" content="王兆圣的个人博客" />
-  <meta property="og:url" content="https://www.aintk.xyz/tags/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="OKVIS要点速览" />
+  <meta property="og:description" content="主要是策略
+
+" />
+  <meta property="og:url" content="https://www.aintk.xyz/post/2018-09-12-okvis-paper/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
 
@@ -40,7 +46,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://www.aintk.xyz/tags/" />
+<link rel="canonical" href="https://www.aintk.xyz/post/2018-09-12-okvis-paper/" />
 <link rel="alternative" href="https://www.aintk.xyz/index.xml" title="Aintk" type="application/atom+xml" />
 
 
@@ -104,6 +110,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -138,8 +148,6 @@
           </li>
       
         <li class="menu-item
-            
-              is-active
             
             
             ">
@@ -226,26 +234,83 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
+  <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+      <h1 class="post-title">OKVIS要点速览</h1>
+      <p class="post-meta">@Sid Wang · Sep 12, 2018 · 1 min read</p>
     </header>
-    <div class="tags-cloud">
+    <article class="post-content"><p>主要是策略</p>
+
+<p></p>
+
+<h2 id="前端">前端</h2>
+
+<h3 id="1-特征点匹配">1.特征点匹配</h3>
+
+<p>特征点 ： a customized multi-scale SSE-optimized Harris corner detector + BRISK descriptor</p>
+
+<p>匹配： 使用imu获取一个状态的先验估计.
+一个local map有 3d位置确定的大量 landmarks. 对这些点：<br />
+1. 对能投到当前帧的点 3D-2D BF-matching<br />
+2. outlier rejection: 1. 使用先验的不确定估计（by imu）， 进行 Mahalanobis test. 2. RANSAC</p>
+
+<p>对于没有3d位置的，2d-2d匹配:
+1. 首先BF-matching， 然后进行三角化
+2. 只有深度不确定性比较小的点才认为初始化成功，否则放到后续帧的matching中
+3. 进行当前帧和newest keyframe的 RANSAC</p>
+
+<h3 id="2-关键帧选取">2.关键帧选取</h3>
+
+<p>在一下情况添加关键帧：<br />
+1. 能够投影到/匹配上 当前帧的点的数量小于 50%<br />
+2. 匹配和提取的点数比值小于 20%</p>
+
+<h2 id="系统的边缘化">系统的边缘化</h2>
+
+<p>系统维护一个sliding window，当新增一个keyframe时，会marginalize window中比较老的一帧以及相关的landmark.<br />
+为了确保矩阵的稀疏性（对于公视点，marginalize掉这些点，会增加帧与帧之间的link， 其稀疏性会被破坏； 即要marg不被其他keyframe观测到的特征点)</p>
+
+<p>另外，系统采用FEJ，其线性化点需要固定下来。<br />
+系统进行marg的时候会用到jacobian，一般来说，我们会用最新的估计值再计算一个jacobian；<br />
+但是如果每次都使用最新的线性化点去计算，其结果导致了 yaw的能观性被改变，而这是不符合系统的固有特性的；<br />
+故huang 提出了FEJ， 在marg的时候都使用同一个线性化点， 保证系统的特性不被人为改变。</p></article>
+    <footer class="post-footer">
       
-      
+      <ul class="post-tags">
         
-        <a href="https://www.aintk.xyz/tags/vio/" class="tag-xxl">vio</a>
-      
+          <li><a href="https://www.aintk.xyz/tags/vio"><span class="tag">VIO</span></a></li>
         
-        <a href="https://www.aintk.xyz/tags/%E6%9D%82%E8%B0%88/" class="tag-l">杂谈</a>
-      
+          <li><a href="https://www.aintk.xyz/tags/slam"><span class="tag">SLAM</span></a></li>
         
-        <a href="https://www.aintk.xyz/tags/slam/" class="tag-xxl">slam</a>
+      </ul>
       
-        
-        <a href="https://www.aintk.xyz/tags/c/c&#43;&#43;/" class="tag-m">c/c&#43;&#43;</a>
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aintk" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
-    </div>
+    
   </section>
   <footer class="site-footer">
   <p>© 2017-2018 Aintk</p>
