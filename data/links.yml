@@ -1,5 +1,5 @@
 01_yifan:
-  title: drifter.fun
+  title: DrifterFun
   link: https://www.drifter.fun/
   avatar: /media/links/yifan.jpeg
   description: 感谢一帆的鼎力支持
@@ -9,3 +9,9 @@
   link: https://www.bloodbaby.tech/
   avatar: /media/links/zeyu.png
   description: 宇哥文化人
+
+03_xinglong:
+  title: 霍老爷的小木屋
+  links: https://www.xlmaverick.me/
+  avatar: /media/links/xinglong.jpg
+  description: 霍老爷可还行
