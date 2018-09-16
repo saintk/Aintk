@@ -271,7 +271,12 @@
 <p>另外，系统采用FEJ，其线性化点需要固定下来。<br />
 系统进行marg的时候会用到jacobian，一般来说，我们会用最新的估计值再计算一个jacobian；<br />
 但是如果每次都使用最新的线性化点去计算，其结果导致了 yaw的能观性被改变，而这是不符合系统的固有特性的；<br />
-故huang 提出了FEJ， 在marg的时候都使用同一个线性化点， 保证系统的特性不被人为改变。</p></article>
+故huang 提出了FEJ， 在marg的时候都使用同一个线性化点， 保证系统的特性不被人为改变。</p>
+
+<p>最后吐嘈一下，OKVIS的代码，写的真的是&hellip; 蒙逼好吧<br />
+太太太&hellip;模块化了~<br />
+虽然很牛逼，但是读起来一层套一层就比较吃力。<br />
+还是VINS清纯不做作，顺着走下来，很舒服~</p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">

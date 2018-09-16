@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Wed, 12 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.aintk.xyz/tags/slam/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>VINS解析</title>
+      <link>https://www.aintk.xyz/post/2018-09-14-vins/</link>
+      <pubDate>Fri, 14 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/2018-09-14-vins/</guid>
+      <description>&lt;p&gt;VINS在最近一年来，可谓是大热，席卷全国slam界，相关的原理代码、解析也是层出不穷，在下不才，也准备将个人的理解整理出来，与大家分享，如有问题，请大家指教~&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>OKVIS要点速览</title>

@@ -52,6 +52,17 @@
     </item>
     
     <item>
+      <title>VINS解析</title>
+      <link>https://www.aintk.xyz/post/2018-09-14-vins/</link>
+      <pubDate>Fri, 14 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/2018-09-14-vins/</guid>
+      <description>&lt;p&gt;VINS在最近一年来，可谓是大热，席卷全国slam界，相关的原理代码、解析也是层出不穷，在下不才，也准备将个人的理解整理出来，与大家分享，如有问题，请大家指教~&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>OKVIS要点速览</title>
       <link>https://www.aintk.xyz/post/2018-09-12-okvis-paper/</link>
       <pubDate>Wed, 12 Sep 2018 00:00:00 +0000</pubDate>
