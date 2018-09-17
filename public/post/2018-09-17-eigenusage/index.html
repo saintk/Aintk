@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Eigen库的使用技巧</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="Sid Wang" />
+  <meta name="description" content="这几天是疯狂开坑啊，开了又不填，不能怪我，毕竟没人看嘛，哈哈~
+今天这个坑是 Eigen的使用技巧~
+大部分来自于Eigen官网，这里并不会完全的罗列，一些我认为没必要讲的，就略过了~
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Eigen库的使用技巧" />
+    <meta name="twitter:description" content="这几天是疯狂开坑啊，开了又不填，不能怪我，毕竟没人看嘛，哈哈~
+今天这个坑是 Eigen的使用技巧~
+大部分来自于Eigen官网，这里并不会完全的罗列，一些我认为没必要讲的，就略过了~
+
+" />
+    <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Eigen库的使用技巧" />
+  <meta property="og:description" content="这几天是疯狂开坑啊，开了又不填，不能怪我，毕竟没人看嘛，哈哈~
+今天这个坑是 Eigen的使用技巧~
+大部分来自于Eigen官网，这里并不会完全的罗列，一些我认为没必要讲的，就略过了~
+
+" />
+  <meta property="og:url" content="https://www.aintk.xyz/post/2018-09-17-eigenusage/" />
+  <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://www.aintk.xyz/post/2018-09-17-eigenusage/" />
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc" />
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587" />
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Aintk" />
+<meta name="msapplication-tooltip" content="Aintk" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://www.aintk.xyz/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.aintk.xyz/img/dragon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.aintk.xyz/img/dragon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://www.aintk.xyz/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://www.aintk.xyz/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://www.aintk.xyz/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://www.aintk.xyz/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://www.aintk.xyz/img/tribal-graffiti-alphabet-s.jpg" alt="Avatar">
+  
+  <h2 class="title">Aintk</h2>
+  
+  <p class="subtitle">~ 功不唐捐 玉汝于成 ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/home/">Home</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/post/">Posts</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/links/">Links</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:aintk@hotmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/saintk" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://www.aintk.xyz/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//space.bilibili.com/4471633" title="Bilibili"><span class="icon icon-bilibili"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a rel="alternate" type="application/rss+xml" href="https://www.aintk.xyz/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Eigen库的使用技巧</h1>
+      <p class="post-meta">@Sid Wang · Sep 17, 2018 · 3 min read</p>
+    </header>
+    <article class="post-content"><p>这几天是疯狂开坑啊，开了又不填，不能怪我，毕竟没人看嘛，哈哈~<br />
+今天这个坑是 Eigen的使用技巧~<br />
+大部分来自于Eigen官网，这里并不会完全的罗列，一些我认为没必要讲的，就略过了~</p>
+
+<p></p>
+
+<h2 id="strong-前言-strong"><strong>前言</strong></h2>
+
+<p>Eigen作为常见的矩阵运算库，其速度和可靠性是得到保证的。与其他的矩阵运算库（intel mkl、ACML、GOTO BLAS、 ATLAS）相比，从官网给出的数据来看，优化已经逼近MKL <a href="http://eigen.tuxfamily.org/index.php?title=Benchmark">Benchmark</a><br />
+另外SLAM中常用的ceres，深度学习常用的tensorflow 都是基于eigen开发的， 足见其性能.</p>
+
+<p>当然，如果实在需要高性能的计算，在编译是可加入Intel MKL的，就能既有Intel MKL的速度，又能拥有Eigen的优雅~
+<a href="http://eigen.tuxfamily.org/dox/TopicUsingIntelMKL.html">Eigen+MKL教程</a></p>
+
+<h2 id="一-dense-matrix-and-array-manipulation">一、Dense matrix and array manipulation</h2>
+
+<h3 id="1-基础矩阵类">1. 基础矩阵类</h3>
+
+<h4 id="strong-构造方法-strong"><strong>构造方法</strong></h4>
+
+<p>matrix类6个模板参数，其中前3个是必选项，后3个为可选项。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Matrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> Scalar,
+       <span style="color:#66d9ef">int</span> RowsAtCompileTime,
+       <span style="color:#66d9ef">int</span> ColsAtCompileTime,
+       <span style="color:#66d9ef">int</span> Options <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+       <span style="color:#66d9ef">int</span> MaxRowsAtCompileTime <span style="color:#f92672">=</span> RowsAtCompileTime,
+       <span style="color:#66d9ef">int</span> MaxColsAtCompileTime <span style="color:#f92672">=</span> ColsAtCompileTime<span style="color:#f92672">&gt;</span>
+</code></pre></div>
+<p>6个参数分别为: 数据类型、行数、列数、数据的存储顺序、最大的行数、最大的列数。<br />
+<strong>注:</strong>后面三个参数一般不用指定，数据的存储顺序基本上也没什么用，因为Eigen主要是使用Column-major实现的，意味着即使Eigen支持 row-major，性能上也是column-major更好； 除非其他外部接口库是使用row-major，否则不建议使用。</p>
+
+<p>Vector是特殊的矩阵，区别只是列数默认为1（RowVecor是行数默认为1).<br />
+矩阵的行列数可以一开始就指定，也可以设置为动态长度，其<strong>构造方法</strong>如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Matrix3f a;
+MatrixXf b; <span style="color:#75715e">// 不指定长度，则其默认长度为0x0
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// dynamic长度也可以在给构造是就指定
+</span><span style="color:#75715e"></span>MatrixXf <span style="color:#a6e22e">a</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">15</span>);
+VectorXf <span style="color:#a6e22e">b</span>(<span style="color:#ae81ff">30</span>);
+
+<span style="color:#75715e">//当然，为了提供统一的API for fixed-size 和 dynamic-size的矩阵，使用这种指定方法去构造 fixed-size matrixes也是合法的:
+</span><span style="color:#75715e"></span>Matrix3f <span style="color:#a6e22e">a</span>(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>);
+
+<span style="color:#75715e">//而对固定长度Vector来说，可以用类似的结构去初始化其内部元素
+</span><span style="color:#75715e"></span>Vector2d <span style="color:#a6e22e">a</span>(<span style="color:#ae81ff">5.0</span>, <span style="color:#ae81ff">6.0</span>);
+Vector3d <span style="color:#a6e22e">b</span>(<span style="color:#ae81ff">5.0</span>, <span style="color:#ae81ff">6.0</span>, <span style="color:#ae81ff">7.0</span>);
+Vector4d <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">5.0</span>, <span style="color:#ae81ff">6.0</span>, <span style="color:#ae81ff">7.0</span>, <span style="color:#ae81ff">8.0</span>);
+</code></pre></div>
+<h4 id="strong-赋值方法-strong"><strong>赋值方法</strong></h4>
+
+<p>赋值方法主要有两种，一种是对应元素标号进行指定，一种是comma-initializer syntax。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#75715e">//对应元素赋值
+</span><span style="color:#75715e"></span>    MatrixXd m(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>);
+    m(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+    m(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.5</span>;
+    m(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+    m(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> m(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>) <span style="color:#f92672">+</span> m(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>);
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is the matrix m:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> m <span style="color:#f92672">&lt;&lt;</span>std<span style="color:#f92672">::</span>endl;
+    VectorXd v(<span style="color:#ae81ff">2</span>);
+    v(<span style="color:#ae81ff">0</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+    v(<span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> v(<span style="color:#ae81ff">0</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is the vector v:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> v <span style="color:#f92672">&lt;&lt;</span>std<span style="color:#f92672">::</span>endl;
+    <span style="color:#75715e">//Comma-initialization
+</span><span style="color:#75715e"></span>    m<span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>;
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is the matrix m with Comma-initialization :</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> m <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+}
+</code></pre></div>
+<h4 id="strong-dynamic-vs-fixed-strong"><strong>Dynamic vs Fixed</strong></h4>
+
+<p>既然可以指定长度和动态长度，那两者有何区别呢？ 用哪种比较好呢？
+Matrix4f mymatrix 等价于 float mymatrix[16]
+而动态长度永远是等价于使用 heap 去 allocate;<br />
+MatrixXf mymatrix(rows,cols) 等价于 float *mymatrix = new float[rows*cols];<br />
+另外， MatrixXf 对象还需要保存其 size。</p>
+
+<p>固定长度的限制在于，必须在编译的时候就知道其size； 另外，在矩阵比较大的情况下，例如32，其相对于动态长度的matrix，性能上的提升微乎其微。
+更糟糕的是，创建一个超级大的matrix,可能会导致 stack overflow.
+最后，动态size时使用vectorize( use SIMD) , 肯能会更加 aggressive.<br />
+<strong>总而言之，在元素size小于等于16的情况下，使用固定长度较好，在较大size的情况下， 使用动态长度较好。</strong></p>
+
+<h3 id="2-矩阵和向量运算">2. 矩阵和向量运算</h3>
+
+<p>Eigen中是重载了 +、-、*等基本运算符的，基本的加减乘，只要矩阵维数合乎数理，是可以直接进行操作的<br />
+<strong>矩阵的加减和数乘:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+  <span style="color:#75715e">//Addition and substraction
+</span><span style="color:#75715e"></span>  Matrix2d a;
+  a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>,
+       <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>;
+  MatrixXd b(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>);
+  b <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>,
+       <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a + b =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">+</span> b <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a - b =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">-</span> b <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Doing a += b;&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  a <span style="color:#f92672">+=</span> b;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Now a =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  Vector3d v(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>);
+  Vector3d w(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>);
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;-v + w - v =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">-</span>v <span style="color:#f92672">+</span> w <span style="color:#f92672">-</span> v <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+
+  <span style="color:#75715e">//Scalar multiplication and division
+</span><span style="color:#75715e"></span>  a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>,
+       <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a * 2.5 =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">*</span> <span style="color:#ae81ff">2.5</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;0.1 * v =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">0.1</span> <span style="color:#f92672">*</span> v <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Doing v *= 2;&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  v <span style="color:#f92672">*=</span> <span style="color:#ae81ff">2</span>;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Now v =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> v <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+}
+</code></pre></div>
+<p><strong>注意:</strong> 无需顾虑使用Eigen计算较大的矩阵，其内部会进行循环展开，只遍历一次(当然使用SIMD可以更加优化)。请放心使用Eigen进行计算~</p>
+
+<p><strong>矩阵转置和共轭:</strong>
+没什么特别的，直接调用函数 transpose(), conjugate(),adjoint()即可。<br />
+但需要注意的是，<strong>不要</strong>使用如下展开方法:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Matrix2i a; a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>;
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is the matrix a:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> endl;
+a <span style="color:#f92672">=</span> a.transpose(); <span style="color:#75715e">// !!! do NOT do this !!!
+</span><span style="color:#75715e"></span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;and the result of the aliasing effect:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> endl;
+
+<span style="color:#75715e">//结果会因为转置没有完成就赋值而发生错误
+</span><span style="color:#75715e"></span></code></pre></div>
+<p><strong>矩阵乘法:</strong><br />
+乘法已经被重载，直接按照数学表达进行相乘即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+  Matrix2d mat;
+  mat <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>,
+         <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>;
+  Vector2d u(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>), v(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">0</span>);
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is mat*mat:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> mat<span style="color:#f92672">*</span>mat <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is mat*u:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> mat<span style="color:#f92672">*</span>u <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is u^T*mat:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> u.transpose()<span style="color:#f92672">*</span>mat <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is u^T*v:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> u.transpose()<span style="color:#f92672">*</span>v <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is u*v^T:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> u<span style="color:#f92672">*</span>v.transpose() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Let&#39;s multiply mat by itself&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  mat <span style="color:#f92672">=</span> mat<span style="color:#f92672">*</span>mat;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Now mat is mat:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> mat <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+}
+</code></pre></div>
+<p><strong>注:</strong>乘法操作m=m*m 不会带来如转置一样的赋值错误，因为在eigen中乘法是被特殊对待的，它会对其进行展开:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// m = m*m 等价于
+</span><span style="color:#75715e"></span>tmp <span style="color:#f92672">=</span>m <span style="color:#f92672">*</span> m;
+m <span style="color:#f92672">=</span>tmp;
+</code></pre></div>
+<p><strong>点乘和叉乘</strong>
+基本操作，如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+  Vector3d v(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>);
+  Vector3d w(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>);
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Dot product: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> v.dot(w) <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">double</span> dp <span style="color:#f92672">=</span> v.adjoint()<span style="color:#f92672">*</span>w; <span style="color:#75715e">// automatic conversion of the inner product to a scalar
+</span><span style="color:#75715e"></span>  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Dot product via a matrix product: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> dp <span style="color:#f92672">&lt;&lt;</span> endl;
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Cross product:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> v.cross(w) <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+</code></pre></div>
+<p><strong>计算一些统计量</strong><br />
+eigen也支持计算一些统计量，包括 sum(),mean(),prod()等等:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+  Eigen<span style="color:#f92672">::</span>Matrix2d mat;
+  mat <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>,
+         <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>;
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is mat.sum():       &#34;</span> <span style="color:#f92672">&lt;&lt;</span> mat.sum()       <span style="color:#f92672">&lt;&lt;</span> endl;
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is mat.prod():      &#34;</span> <span style="color:#f92672">&lt;&lt;</span> mat.prod()      <span style="color:#f92672">&lt;&lt;</span> endl;
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is mat.mean():      &#34;</span> <span style="color:#f92672">&lt;&lt;</span> mat.mean()      <span style="color:#f92672">&lt;&lt;</span> endl;
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is mat.minCoeff():  &#34;</span> <span style="color:#f92672">&lt;&lt;</span> mat.minCoeff()  <span style="color:#f92672">&lt;&lt;</span> endl;
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is mat.maxCoeff():  &#34;</span> <span style="color:#f92672">&lt;&lt;</span> mat.maxCoeff()  <span style="color:#f92672">&lt;&lt;</span> endl;
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is mat.trace():     &#34;</span> <span style="color:#f92672">&lt;&lt;</span> mat.trace()     <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+</code></pre></div></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://www.aintk.xyz/tags/c/c&#43;&#43;"><span class="tag">C/C&#43;&#43;</span></a></li>
+        
+          <li><a href="https://www.aintk.xyz/tags/slam"><span class="tag">SLAM</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aintk" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 Aintk</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://www.aintk.xyz/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-XXXXXXXX-X', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>
