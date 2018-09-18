@@ -7,13 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Mon, 17 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 18 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.aintk.xyz/tags/c/c++/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Eigen库的使用技巧</title>
+      <title>Eigen库的使用技巧(二)</title>
+      <link>https://www.aintk.xyz/post/2018-09-18-eigenusage2/</link>
+      <pubDate>Tue, 18 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/2018-09-18-eigenusage2/</guid>
+      <description>&lt;p&gt;一个博客写不完，分开写吧，后面再统一整理顺序.
+Part I   为 eigen的基本数据结构及其操作
+Part II  为 eigen求解线性代数问题
+Part III 为 eigen求解几何问题&lt;/p&gt;
+
+&lt;p&gt;本篇为Part II: eigen求解线性代数问题
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Eigen库的使用技巧(一)</title>
       <link>https://www.aintk.xyz/post/2018-09-17-eigenusage/</link>
       <pubDate>Mon, 17 Sep 2018 00:00:00 +0000</pubDate>
       
@@ -22,7 +37,8 @@
 今天这个坑是 Eigen的使用技巧~&lt;br /&gt;
 大部分来自于Eigen官网，这里并不会完全的罗列，一些我认为没必要讲的，就略过了~&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;本篇为 Part I: eigen的基本数据结构及其操作
+&lt;/p&gt;</description>
     </item>
     
     <item>

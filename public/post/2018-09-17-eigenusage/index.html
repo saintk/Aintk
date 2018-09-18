@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>Eigen库的使用技巧</title>
+  <title>Eigen库的使用技巧(一)</title>
 
   
   
@@ -19,30 +19,27 @@
   <meta name="description" content="这几天是疯狂开坑啊，开了又不填，不能怪我，毕竟没人看嘛，哈哈~
 今天这个坑是 Eigen的使用技巧~
 大部分来自于Eigen官网，这里并不会完全的罗列，一些我认为没必要讲的，就略过了~
-
-" />
+本篇为 Part I: eigen的基本数据结构及其操作 " />
 
   
   
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="Eigen库的使用技巧" />
+    <meta name="twitter:title" content="Eigen库的使用技巧(一)" />
     <meta name="twitter:description" content="这几天是疯狂开坑啊，开了又不填，不能怪我，毕竟没人看嘛，哈哈~
 今天这个坑是 Eigen的使用技巧~
 大部分来自于Eigen官网，这里并不会完全的罗列，一些我认为没必要讲的，就略过了~
-
-" />
+本篇为 Part I: eigen的基本数据结构及其操作 " />
     <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
   
 
   
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Eigen库的使用技巧" />
+  <meta property="og:title" content="Eigen库的使用技巧(一)" />
   <meta property="og:description" content="这几天是疯狂开坑啊，开了又不填，不能怪我，毕竟没人看嘛，哈哈~
 今天这个坑是 Eigen的使用技巧~
 大部分来自于Eigen官网，这里并不会完全的罗列，一些我认为没必要讲的，就略过了~
-
-" />
+本篇为 Part I: eigen的基本数据结构及其操作 " />
   <meta property="og:url" content="https://www.aintk.xyz/post/2018-09-17-eigenusage/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
@@ -240,14 +237,15 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Eigen库的使用技巧</h1>
-      <p class="post-meta">@Sid Wang · Sep 17, 2018 · 3 min read</p>
+      <h1 class="post-title">Eigen库的使用技巧(一)</h1>
+      <p class="post-meta">@Sid Wang · Sep 17, 2018 · 6 min read</p>
     </header>
     <article class="post-content"><p>这几天是疯狂开坑啊，开了又不填，不能怪我，毕竟没人看嘛，哈哈~<br />
 今天这个坑是 Eigen的使用技巧~<br />
 大部分来自于Eigen官网，这里并不会完全的罗列，一些我认为没必要讲的，就略过了~</p>
 
-<p></p>
+<p>本篇为 Part I: eigen的基本数据结构及其操作
+</p>
 
 <h2 id="strong-前言-strong"><strong>前言</strong></h2>
 
@@ -418,7 +416,180 @@ eigen也支持计算一些统计量，包括 sum(),mean(),prod()等等:</p>
   cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is mat.maxCoeff():  &#34;</span> <span style="color:#f92672">&lt;&lt;</span> mat.maxCoeff()  <span style="color:#f92672">&lt;&lt;</span> endl;
   cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is mat.trace():     &#34;</span> <span style="color:#f92672">&lt;&lt;</span> mat.trace()     <span style="color:#f92672">&lt;&lt;</span> endl;
 }
-</code></pre></div></article>
+</code></pre></div>
+<h3 id="3-array类">3. Array类</h3>
+
+<p>Eigen除了常用的Matrix类，还提供了Array类，定义基本与Matrix相同。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//Type	Typedef
+</span><span style="color:#75715e"></span>Array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span>,Dynamic,<span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span>  ArrayXf 
+Array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span>  Array3f 
+Array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span>,Dynamic,Dynamic<span style="color:#f92672">&gt;</span>  ArrayXXd 
+Array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;</span>  Array33d 
+</code></pre></div>
+<p>其赋值和加减操作是与matrix完全相同的，唯一不同的地方在于乘法，其乘法是系数一一对应相乘:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+  ArrayXXf a(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>);
+  ArrayXXf b(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>);
+  a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,
+       <span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>;
+  b <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,
+       <span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>;
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a * b = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">*</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+<span style="color:#75715e">/*
+</span><span style="color:#75715e">Output:
+</span><span style="color:#75715e">a * b = 
+</span><span style="color:#75715e"> 5 12
+</span><span style="color:#75715e">21 32
+</span><span style="color:#75715e">*/</span>
+</code></pre></div>
+<p>Matrix 和 array之间可以方便的<strong>相互转换</strong>，当需要使用<strong>逐系数</strong>的运算时，可以通过转换进行计算，也可以使用Matrix提供的cwiseProduct()方法来实现。</p>
+
+<h3 id="4-块操作">4. 块操作</h3>
+
+<h4 id="strong-块运算符-strong"><strong>块运算符</strong></h4>
+
+<p>块操作的最基本用法就是提取matrix/array中的子块:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//Block operation	    a dynamic-size block expression	    a fixed-size block expression
+</span><span style="color:#75715e"></span>Block of <span style="color:#a6e22e">size</span> (p,q), starting at (i,j)	matrix.block(i,j,p,q);  matrix.block<span style="color:#f92672">&lt;</span>p,q<span style="color:#f92672">&gt;</span>(i,j);
+</code></pre></div>
+<p>Eigen的下标跟C++相同，也是<strong>从0开始</strong></p>
+
+<p>还有一些其他的块运算符，包括Matrix的： row(i),col(j),topLeftCorner(p,q),topRows(q),rightCols(q)等等；<br />
+Vector的 head(n), tail(n), segment(i,n).</p>
+
+<h3 id="5-高级初始化技巧">5. 高级初始化技巧</h3>
+
+<p>之前介绍过 comma initializer, 其实它并不只是简单的能够单个元素输入，还可以逐矩阵、逐向量的输入:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// 逐向量
+</span><span style="color:#75715e"></span>RowVectorXd <span style="color:#a6e22e">vec1</span>(<span style="color:#ae81ff">3</span>);
+vec1 <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>;
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;vec1 = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> vec1 <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+RowVectorXd <span style="color:#a6e22e">vec2</span>(<span style="color:#ae81ff">4</span>);
+vec2 <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">16</span>;
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;vec2 = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> vec2 <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+RowVectorXd <span style="color:#a6e22e">joined</span>(<span style="color:#ae81ff">7</span>);
+joined <span style="color:#f92672">&lt;&lt;</span> vec1, vec2;
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;joined = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> joined <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+
+<span style="color:#75715e">// 逐矩阵
+</span><span style="color:#75715e"></span>MatrixXf <span style="color:#a6e22e">matA</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>);
+matA <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>;
+MatrixXf <span style="color:#a6e22e">matB</span>(<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">4</span>);
+matB <span style="color:#f92672">&lt;&lt;</span> matA, matA<span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>, matA<span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>, matA;
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> matB <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+
+<span style="color:#75715e">//更复杂的混合操作
+</span><span style="color:#75715e"></span>Matrix3f m;
+m.row(<span style="color:#ae81ff">0</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>;
+m.block(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>;
+m.col(<span style="color:#ae81ff">2</span>).tail(<span style="color:#ae81ff">2</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">9</span>;                   
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> m;
+</code></pre></div>
+<p>还有一些基本的矩阵，类似于 Zero(),Identity()，Constant()不再赘述。</p>
+
+<h3 id="6-map类">6. Map类</h3>
+
+<p>map类是与C/C++的原始数据对接的类，可以直接导入C++中的数组或vector.
+其基本构造方法如下:
+Map<MatrixXf> mf(pf,rows,columns); //动态长度
+Map<const Vector4i> mi(pi); //固定长度</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> array[<span style="color:#ae81ff">8</span>];
+<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">8</span>; <span style="color:#f92672">++</span>i) array[i] <span style="color:#f92672">=</span> i;
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Column-major:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> Map<span style="color:#f92672">&lt;</span>Matrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">4</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>(array) <span style="color:#f92672">&lt;&lt;</span> endl;
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Row-major:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> Map<span style="color:#f92672">&lt;</span>Matrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">4</span>,RowMajor<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>(array) <span style="color:#f92672">&lt;&lt;</span> endl;
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Row-major using stride:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span>
+  Map<span style="color:#f92672">&lt;</span>Matrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">4</span><span style="color:#f92672">&gt;</span>, Unaligned, Stride<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">4</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>(array) <span style="color:#f92672">&lt;&lt;</span> endl;
+</code></pre></div>
+<p>Map类使用其他库来导入vectors and Matrices时非常有用.</p>
+
+<h3 id="7-reshape-and-slicing">7. Reshape and Slicing</h3>
+
+<p>Reshape操作要保持系数不变，同时改变矩阵的形状，可以使用Map进行操作，但要注意数据存储顺序.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">MatrixXf <span style="color:#a6e22e">M1</span>(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>);    <span style="color:#75715e">// Column-major storage
+</span><span style="color:#75715e"></span>M1 <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>,
+      <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>,
+      <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>;
+Map<span style="color:#f92672">&lt;</span>RowVectorXf<span style="color:#f92672">&gt;</span> v1(M1.data(), M1.size());
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;v1:&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl <span style="color:#f92672">&lt;&lt;</span> v1 <span style="color:#f92672">&lt;&lt;</span> endl;
+Matrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span>,Dynamic,Dynamic,RowMajor<span style="color:#f92672">&gt;</span> M2(M1);
+Map<span style="color:#f92672">&lt;</span>RowVectorXf<span style="color:#f92672">&gt;</span> v2(M2.data(), M2.size());
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;v2:&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl <span style="color:#f92672">&lt;&lt;</span> v2 <span style="color:#f92672">&lt;&lt;</span> endl;
+
+<span style="color:#75715e">/* Output
+</span><span style="color:#75715e">v1:
+</span><span style="color:#75715e">1 4 7 2 5 8 3 6 9
+</span><span style="color:#75715e">v2:
+</span><span style="color:#75715e">1 2 3 4 5 6 7 8 9
+</span><span style="color:#75715e">*/</span>
+</code></pre></div>
+<p>进行reshape时要注意数据的存储顺序，matrix默认是Column-major.</p>
+
+<p>同样的，可以使用Map来快速完成<strong>Slicing</strong>，可以完成隔一列取一列等骚操作:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">RowVectorXf v <span style="color:#f92672">=</span> RowVectorXf<span style="color:#f92672">::</span>LinSpaced(<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">19</span>);
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Input:&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl <span style="color:#f92672">&lt;&lt;</span> v <span style="color:#f92672">&lt;&lt;</span> endl;
+Map<span style="color:#f92672">&lt;</span>RowVectorXf,<span style="color:#ae81ff">0</span>,InnerStride<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> v2(v.data(), v.size()<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>);
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Even:&#34;</span> <span style="color:#f92672">&lt;&lt;</span> v2 <span style="color:#f92672">&lt;&lt;</span> endl;
+
+<span style="color:#75715e">/*Ouput
+</span><span style="color:#75715e">Input:
+</span><span style="color:#75715e"> 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19
+</span><span style="color:#75715e">Even: 0  2  4  6  8 10 12 14 16 18
+</span><span style="color:#75715e">*/</span>
+</code></pre></div>
+<h3 id="8-aliasing">8. Aliasing</h3>
+
+<p>Aliasing在eigen中是指， Matrix同时出现在一个等式的左右，即 mat = 2*mat这种操作； 这类操作有些是可以的，但有些可能会<strong>引发问题，得不到预期结果</strong>。<br />
+如之前提及的: mat = mat.transpose()会导致错误结果一样。<br />
+其问题来源于 eigen使用了 lazy evaluation ,如下说明</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">  <span style="color:#75715e">//等式  
+</span><span style="color:#75715e"></span>  mat.bottomRightCorner(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>) <span style="color:#f92672">=</span> mat.topLeftCorner(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>); 
+  <span style="color:#75715e">//实际上等价于
+</span><span style="color:#75715e"></span>  mat(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> mat(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>);
+  mat(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>) <span style="color:#f92672">=</span> mat(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>);
+  mat(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> mat(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>);
+  mat(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>) <span style="color:#f92672">=</span> mat(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>);
+</code></pre></div>
+<p>当矩阵操作有<strong>重叠区域</strong>，就有可能产生问题，那么怎么解决这个问题?<br />
+使用<strong>eval()</strong>函数，可以强制运算完毕之后，再进行后续操作，从而解决这个问题:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">MatrixXi <span style="color:#a6e22e">mat</span>(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>); 
+mat <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>,   <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>,   <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>;
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is the matrix mat:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> mat <span style="color:#f92672">&lt;&lt;</span> endl;
+<span style="color:#75715e">// The eval() solves the aliasing problem
+</span><span style="color:#75715e"></span>mat.bottomRightCorner(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>) <span style="color:#f92672">=</span> mat.topLeftCorner(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>).eval();
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;After the assignment, mat = </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> mat <span style="color:#f92672">&lt;&lt;</span> endl;
+</code></pre></div>
+<p>transpose()的自操作，可以使用transposeInPlace()进行实现.</p>
+
+<h3 id="9-在使用eigen时碰到的一些内存错误">9. 在使用eigen时碰到的一些内存错误</h3>
+
+<p>通常分为几类错误:1.结构体包含eigen对象 2.使用stl容器 3.使用eigen对象作为函数参数 4.编译器错误 最优解决方法参考<a href="http://eigen.tuxfamily.org/dox/group__TopicUnalignedArrayAssert.html">官网</a></p>
+
+<p>1 结构体包含eigen成员<br />
+必须进行宏定义 <strong>EIGEN_MAKE_ALIGNED_OPERATOR_NEW</strong>, 保证内存对齐</p>
+
+<p>2 stl容器包含eigen成员<br />
+必须使用 16-byte的内存对齐器，若要使用vector，必须包含<Eigen/StdVector>，如下例子:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// stl containers
+</span><span style="color:#75715e">//For example, instead of
+</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, Eigen<span style="color:#f92672">::</span>Vector4f<span style="color:#f92672">&gt;</span>
+<span style="color:#75715e">//you need to use
+</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, Eigen<span style="color:#f92672">::</span>Vector4f, std<span style="color:#f92672">::</span>less<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, 
+         Eigen<span style="color:#f92672">::</span>aligned_allocator<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span>, Eigen<span style="color:#f92672">::</span>Vector4f<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>
+
+<span style="color:#75715e">//for vector
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;Eigen/StdVector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">/* ... */</span>
+std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Eigen<span style="color:#f92672">::</span>Vector4f,Eigen<span style="color:#f92672">::</span>aligned_allocator<span style="color:#f92672">&lt;</span>Eigen<span style="color:#f92672">::</span>Vector4f<span style="color:#f92672">&gt;&gt;</span>
+</code></pre></div>
+<p>3 使用eigen对象作为函数参数<br />
+<strong>必须</strong>使用<strong>常值引用</strong>进行传参.<br />
+void my_function(Eigen::Vector2d v);<br />
+必须写成 void my_function(const Eigen::Vector2d&amp; v);</p>
+
+<p>4 编译器错误<br />
+这个错误已经在GCC 4.5及以上版本被修复.</p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
