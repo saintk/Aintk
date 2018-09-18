@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Eigen库的使用技巧(三)</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="Sid Wang" />
+  <meta name="description" content="本篇为Part III: eigen求解几何问题 " />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Eigen库的使用技巧(三)" />
+    <meta name="twitter:description" content="本篇为Part III: eigen求解几何问题 " />
+    <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Eigen库的使用技巧(三)" />
+  <meta property="og:description" content="本篇为Part III: eigen求解几何问题 " />
+  <meta property="og:url" content="https://www.aintk.xyz/post/2018-09-18-eigenusage3/" />
+  <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://www.aintk.xyz/post/2018-09-18-eigenusage3/" />
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc" />
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587" />
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Aintk" />
+<meta name="msapplication-tooltip" content="Aintk" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://www.aintk.xyz/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.aintk.xyz/img/dragon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.aintk.xyz/img/dragon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://www.aintk.xyz/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://www.aintk.xyz/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://www.aintk.xyz/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://www.aintk.xyz/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://www.aintk.xyz/img/tribal-graffiti-alphabet-s.jpg" alt="Avatar">
+  
+  <h2 class="title">Aintk</h2>
+  
+  <p class="subtitle">~ 功不唐捐 玉汝于成 ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/home/">Home</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/post/">Posts</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/links/">Links</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://www.aintk.xyz/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:aintk@hotmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/saintk" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://www.aintk.xyz/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//space.bilibili.com/4471633" title="Bilibili"><span class="icon icon-bilibili"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a rel="alternate" type="application/rss+xml" href="https://www.aintk.xyz/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Eigen库的使用技巧(三)</h1>
+      <p class="post-meta">@Sid Wang · Sep 18, 2018 · 2 min read</p>
+    </header>
+    <article class="post-content"><p>本篇为Part III: eigen求解几何问题
+</p>
+
+<h2 id="三-geometry">三、Geometry</h2>
+
+<h3 id="1-space-transformations">1. Space transformations</h3>
+
+<h4 id="strong-基本类型-strong"><strong>基本类型</strong></h4>
+
+<p>Eigen提供的大量的 transformation types:<br />
+<img src="https://www.aintk.xyz/media/posts/2018-09-18-eigen/transformationTypes.png" alt="变换类型" /></p>
+
+<p><strong>Note: </strong><br />
+1. 对于旋转, 多个单一矢量，优先选择<strong>旋转矩阵</strong>;对其他表达方法，优择<strong>Quanternion</strong>,因为它紧凑、快速、稳定。AngleAxis效率低下，尽量少用。<br />
+2. 对于 Translation 和 scaling ，其主要意义与 AngleAxis一样，都是为了简化 transformation的构造/初始化。</p>
+
+<h4 id="strong-基本操作-strong"><strong>基本操作</strong></h4>
+
+<p>eigen已经重载了相关运算符的乘法和求逆.<br />
+对于 Rotation2D 和 Quaternion,提供了球面插值操作: rot3 = rot1.slerp(alpha,rot2)<br />
+example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//代码 来自SLAM十四讲
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Eigen/Core&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Eigen/Geometry&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span> ( <span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span><span style="color:#f92672">**</span> argv )
+{
+    <span style="color:#75715e">// Eigen/Geometry 模块提供了各种旋转和平移的表示
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 3D 旋转矩阵直接使用 Matrix3d 或 Matrix3f
+</span><span style="color:#75715e"></span>    Eigen<span style="color:#f92672">::</span>Matrix3d rotation_matrix <span style="color:#f92672">=</span> Eigen<span style="color:#f92672">::</span>Matrix3d<span style="color:#f92672">::</span>Identity();
+    <span style="color:#75715e">// 旋转向量使用 AngleAxis, 它底层不直接是Matrix，但运算可以当作矩阵（因为重载了运算符）
+</span><span style="color:#75715e"></span>    Eigen<span style="color:#f92672">::</span>AngleAxisd rotation_vector ( M_PI<span style="color:#f92672">/</span><span style="color:#ae81ff">4</span>, Eigen<span style="color:#f92672">::</span>Vector3d ( <span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span> ) );     <span style="color:#75715e">//沿 Z 轴旋转 45 度
+</span><span style="color:#75715e"></span>    cout .precision(<span style="color:#ae81ff">3</span>);
+    cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;rotation matrix =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">&lt;&lt;</span>rotation_vector.matrix() <span style="color:#f92672">&lt;&lt;</span>endl;                <span style="color:#75715e">//用matrix()转换成矩阵
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 也可以直接赋值
+</span><span style="color:#75715e"></span>    rotation_matrix <span style="color:#f92672">=</span> rotation_vector.toRotationMatrix();
+    <span style="color:#75715e">// 用 AngleAxis 可以进行坐标变换
+</span><span style="color:#75715e"></span>    Eigen<span style="color:#f92672">::</span>Vector3d v ( <span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span> );
+    Eigen<span style="color:#f92672">::</span>Vector3d v_rotated <span style="color:#f92672">=</span> rotation_vector <span style="color:#f92672">*</span> v;
+    cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;(1,0,0) after rotation = &#34;</span><span style="color:#f92672">&lt;&lt;</span>v_rotated.transpose()<span style="color:#f92672">&lt;&lt;</span>endl;
+    <span style="color:#75715e">// 或者用旋转矩阵
+</span><span style="color:#75715e"></span>    v_rotated <span style="color:#f92672">=</span> rotation_matrix <span style="color:#f92672">*</span> v;
+    cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;(1,0,0) after rotation = &#34;</span><span style="color:#f92672">&lt;&lt;</span>v_rotated.transpose()<span style="color:#f92672">&lt;&lt;</span>endl;
+
+    <span style="color:#75715e">// 欧拉角: 可以将旋转矩阵直接转换成欧拉角
+</span><span style="color:#75715e"></span>    Eigen<span style="color:#f92672">::</span>Vector3d euler_angles <span style="color:#f92672">=</span> rotation_matrix.eulerAngles ( <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span> ); <span style="color:#75715e">// ZYX顺序，即roll pitch yaw顺序
+</span><span style="color:#75715e"></span>    cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;yaw pitch roll = &#34;</span><span style="color:#f92672">&lt;&lt;</span>euler_angles.transpose()<span style="color:#f92672">&lt;&lt;</span>endl;
+
+    <span style="color:#75715e">// 欧氏变换矩阵使用 Eigen::Isometry
+</span><span style="color:#75715e"></span>    Eigen<span style="color:#f92672">::</span>Isometry3d T<span style="color:#f92672">=</span>Eigen<span style="color:#f92672">::</span>Isometry3d<span style="color:#f92672">::</span>Identity();                <span style="color:#75715e">// 虽然称为3d，实质上是4＊4的矩阵
+</span><span style="color:#75715e"></span>    T.rotate ( rotation_vector );                                     <span style="color:#75715e">// 按照rotation_vector进行旋转
+</span><span style="color:#75715e"></span>    T.pretranslate ( Eigen<span style="color:#f92672">::</span>Vector3d ( <span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span> ) );                     <span style="color:#75715e">// 把平移向量设成(1,3,4)
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Transform matrix = </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> T.matrix() <span style="color:#f92672">&lt;&lt;</span>endl;
+
+    <span style="color:#75715e">// 用变换矩阵进行坐标变换
+</span><span style="color:#75715e"></span>    Eigen<span style="color:#f92672">::</span>Vector3d v_transformed <span style="color:#f92672">=</span> T<span style="color:#f92672">*</span>v;                              <span style="color:#75715e">// 相当于R*v+t
+</span><span style="color:#75715e"></span>    cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;v tranformed = &#34;</span><span style="color:#f92672">&lt;&lt;</span>v_transformed.transpose()<span style="color:#f92672">&lt;&lt;</span>endl;
+
+    <span style="color:#75715e">// 对于仿射和射影变换，使用 Eigen::Affine3d 和 Eigen::Projective3d 即可，略
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// 四元数
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 可以直接把AngleAxis赋值给四元数，反之亦然
+</span><span style="color:#75715e"></span>    Eigen<span style="color:#f92672">::</span>Quaterniond q <span style="color:#f92672">=</span> Eigen<span style="color:#f92672">::</span>Quaterniond ( rotation_vector );
+    cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;quaternion = </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">&lt;&lt;</span>q.coeffs() <span style="color:#f92672">&lt;&lt;</span>endl;   <span style="color:#75715e">// 请注意coeffs的顺序是(x,y,z,w),w为实部，前三者为虚部
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 也可以把旋转矩阵赋给它
+</span><span style="color:#75715e"></span>    q <span style="color:#f92672">=</span> Eigen<span style="color:#f92672">::</span>Quaterniond ( rotation_matrix );
+    cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;quaternion = </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">&lt;&lt;</span>q.coeffs() <span style="color:#f92672">&lt;&lt;</span>endl;
+    <span style="color:#75715e">// 使用四元数旋转一个向量，使用重载的乘法即可
+</span><span style="color:#75715e"></span>    v_rotated <span style="color:#f92672">=</span> q<span style="color:#f92672">*</span>v; <span style="color:#75715e">// 注意数学上是qvq^{-1}
+</span><span style="color:#75715e"></span>    cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;(1,0,0) after rotation = &#34;</span><span style="color:#f92672">&lt;&lt;</span>v_rotated.transpose()<span style="color:#f92672">&lt;&lt;</span>endl;
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div>
+<h2 id="strong-结语-strong"><strong>结语</strong></h2>
+
+<p>最后一篇有点短，主要是geometry这部门并没有想象中的那么多，只是基本的使用罢了。<br />
+eigen库的东西当然不是简单几篇blog就能介绍完的，遇到问题，善用搜索引擎，去对应的document中去查找，会找到答案的~</p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://www.aintk.xyz/tags/c/c&#43;&#43;"><span class="tag">C/C&#43;&#43;</span></a></li>
+        
+          <li><a href="https://www.aintk.xyz/tags/slam"><span class="tag">SLAM</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aintk" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 Aintk</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://www.aintk.xyz/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-XXXXXXXX-X', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>

@@ -232,7 +232,7 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">Eigen库的使用技巧(二)</h1>
-      <p class="post-meta">@Sid Wang · Sep 18, 2018 · 1 min read</p>
+      <p class="post-meta">@Sid Wang · Sep 17, 2018 · 2 min read</p>
     </header>
     <article class="post-content"><p>一个博客写不完，分开写吧，后面再统一整理顺序.
 Part I   为 eigen的基本数据结构及其操作
@@ -244,7 +244,125 @@ Part III 为 eigen求解几何问题</p>
 
 <h2 id="二-linear-problem">二、Linear Problem</h2>
 
-<h3 id="1-线性代数和矩阵分解">1. 线性代数和矩阵分解</h3></article>
+<h3 id="1-线性代数和矩阵分解">1. 线性代数和矩阵分解</h3>
+
+<p>基本问题就是，如何求解下面线性代数问题:
+$$ Ax = b$$<br />
+其中A和b是矩阵( 特殊情况下，b可能为vector), 求解x。</p>
+
+<h4 id="strong-线性方程组求解-strong"><strong>线性方程组求解:</strong></h4>
+
+<p>可以使用不同的矩阵分解方法求解这个问题，其速度或精度需要自己权衡.
+基本用例如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+   Matrix3f A;
+   Vector3f b;
+   A <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,  <span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,  <span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">10</span>;
+   b <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>;
+   cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is the matrix A:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> A <span style="color:#f92672">&lt;&lt;</span> endl;
+   cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is the vector b:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+   Vector3f x <span style="color:#f92672">=</span> A.colPivHouseholderQr().solve(b);
+   cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;The solution is:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+</code></pre></div>
+<p>不同的分解方法，其精度和速度如下:
+<img src="https://www.aintk.xyz/media/posts/2018-09-18-eigen/different_decompose.png" alt="精度和速度权衡" /><br />
+即，如果矩阵是<strong>正定</strong>的，使用LLT或LDLT是很好的选择.</p>
+
+<h4 id="strong-矩阵的特征值与特征向量-strong"><strong>矩阵的特征值与特征向量:</strong></h4>
+
+<p>Eigen 提供了多种方法去求解矩阵的特征值和特征向量，对于自伴随矩阵，使用 SelfAdjointEigenSolver最佳，对于一般的实数矩阵和复数矩阵，使用 EigenSolver或 ComplexEigenSolver.<br />
+example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">EigenSolver<span style="color:#f92672">&lt;</span>MatrixXf<span style="color:#f92672">&gt;</span> es;
+MatrixXf A <span style="color:#f92672">=</span> MatrixXf<span style="color:#f92672">::</span>Random(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">4</span>);
+es.compute(A, <span style="color:#75715e">/* computeEigenvectors = */</span> false);
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;The eigenvalues of A are: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> es.eigenvalues().transpose() <span style="color:#f92672">&lt;&lt;</span> endl;
+es.compute(A <span style="color:#f92672">+</span> MatrixXf<span style="color:#f92672">::</span>Identity(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">4</span>), false); <span style="color:#75715e">// re-use es to compute eigenvalues of A+I
+</span><span style="color:#75715e"></span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;The eigenvalues of A+I are: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> es.eigenvalues().transpose() <span style="color:#f92672">&lt;&lt;</span> endl;
+</code></pre></div>
+<h4 id="strong-最小二乘解-strong"><strong>最小二乘解:</strong></h4>
+
+<p>求解最小二乘解的最精确的方法是SVD分解，eigen提供了两种实现: BDCSVD &amp; JacobianSVD，推荐使用BDCSVD。<br />
+example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+   MatrixXf A <span style="color:#f92672">=</span> MatrixXf<span style="color:#f92672">::</span>Random(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>);
+   cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is the matrix A:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> A <span style="color:#f92672">&lt;&lt;</span> endl;
+   VectorXf b <span style="color:#f92672">=</span> VectorXf<span style="color:#f92672">::</span>Random(<span style="color:#ae81ff">3</span>);
+   cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Here is the right hand side b:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+   cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;The least-squares solution is:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+        <span style="color:#f92672">&lt;&lt;</span> A.bdcSvd(ComputeThinU <span style="color:#f92672">|</span> ComputeThinV).solve(b) <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+</code></pre></div>
+<p>除了SVD分解，还可以使用QR分解和Cholesky分解，more faster but less reliable.</p>
+
+<p><strong>应用中，Cholesky分解可能更加多见，如下:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// 求解 Ax = b的最小二乘解，等价于求解 A&#39;Ax = A&#39;b的解.
+</span><span style="color:#75715e"></span>MatrixXf A <span style="color:#f92672">=</span> MatrixXf<span style="color:#f92672">::</span>Random(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>);
+VectorXf b <span style="color:#f92672">=</span> VectorXf<span style="color:#f92672">::</span>Random(<span style="color:#ae81ff">3</span>);
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;The solution using normal equations is:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+     <span style="color:#f92672">&lt;&lt;</span> (A.transpose() <span style="color:#f92672">*</span> A).ldlt().solve(A.transpose() <span style="color:#f92672">*</span> b) <span style="color:#f92672">&lt;&lt;</span> endl;
+</code></pre></div>
+<p>其他一些，分解和构造函数分离，矩阵秩的获得等不再赘述。<br />
+一些意见:
+1. LLT 是最快的solver.
+2. 对于大型的超定方程，Cholesky/LU分解的cost主要在计算 对称协方差矩阵.
+3. 对于超大规模的问题， 只有实现 cache-friendly blocking strategy的方法，才能很好的扩展，所以在 4k x 4k的矩阵中， HouseholderQR 会比 LDLT更快; 目前 LLT, PartialPivLU, HouseholderQR, and BDCSVD 支持该策略。</p>
+
+<h3 id="2-稀疏矩阵的使用">2. 稀疏矩阵的使用</h3>
+
+<p>对于很多应用，经常会遇到一个超大的矩阵，只有很少一部分系数非0； 在这种情况，使用稀疏矩阵的结构可以有效的减少内存占用、提高性能。<br />
+稀疏矩阵实现了 Compressed Column(or Row) Storage, 精简的保存矩阵数据。一般的稀疏矩阵，元素之间会预留空的空间，方便插入新元素； 当元素之间不预留任何空间，即为压缩模式。</p>
+
+<p>Sparse矩阵相对于Dense矩阵，少了很多灵活性，其中一个很大的限制就是<strong>运算时，两个稀疏矩阵的存储方法必须一致</strong>, 这就导致了计算 A&rsquo;+A 必须将A&rsquo;存在一个临时变量中，如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">SparseMatrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> A, B;
+B <span style="color:#f92672">=</span> SparseMatrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(A.transpose()) <span style="color:#f92672">+</span> A;
+</code></pre></div>
+<p>其他的块操作与dense矩阵基本一致，并且两者可以很方便的进行转换。</p>
+
+<p>eigen提供了丰富的 built-in solvers，具体参考<a href="http://eigen.tuxfamily.org/dox/group__TopicSparseSystems.html">官网</a><br />
+所有的sovler都是相同的用法:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Eigen/RequiredModuleName&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>SparseMatrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> A;
+<span style="color:#75715e">// fill A
+</span><span style="color:#75715e"></span>VectorXd b, x;
+<span style="color:#75715e">// fill b
+</span><span style="color:#75715e">// solve Ax = b
+</span><span style="color:#75715e"></span>SolverClassName<span style="color:#f92672">&lt;</span>SparseMatrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> solver;
+solver.compute(A);
+<span style="color:#66d9ef">if</span>(solver.info()<span style="color:#f92672">!=</span>Success) {
+  <span style="color:#75715e">// decomposition failed
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span>;
+}
+x <span style="color:#f92672">=</span> solver.solve(b);
+<span style="color:#66d9ef">if</span>(solver.info()<span style="color:#f92672">!=</span>Success) {
+  <span style="color:#75715e">// solving failed
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span>;
+}
+<span style="color:#75715e">// solve for another right hand side:
+</span><span style="color:#75715e"></span>x1 <span style="color:#f92672">=</span> solver.solve(b1);
+</code></pre></div>
+<p>在某些问题，求解可以<strong>使用同一个pattern</strong>，可以用到下述优化方法，将求解给拆解开来:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">SolverClassName<span style="color:#f92672">&lt;</span>SparseMatrix<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> solver;
+solver.analyzePattern(A);   <span style="color:#75715e">// for this step the numerical values of A are not used
+</span><span style="color:#75715e"></span>solver.factorize(A);
+x1 <span style="color:#f92672">=</span> solver.solve(b1);
+x2 <span style="color:#f92672">=</span> solver.solve(b2);
+...
+A <span style="color:#f92672">=</span> ...;                    <span style="color:#75715e">// modify the values of the nonzeros of A, the nonzeros pattern must stay unchanged
+</span><span style="color:#75715e"></span>solver.factorize(A);
+x1 <span style="color:#f92672">=</span> solver.solve(b1);
+x2 <span style="color:#f92672">=</span> solver.solve(b2);
+...
+
+<span style="color:#75715e">// compute() 等价于 使用 analyzePattern() &amp; factorize()
+</span><span style="color:#75715e"></span></code></pre></div>
+<p>不同的sovler提供了不同的功能，细节需要到对应的class文档中查阅。</p>
+
+<p><strong>Matrix-free solvers</strong><br />
+Matrix-free 是求解线性方程的一种特殊解法，不保存系数矩阵，仅通过 matrix-vector products来获得；这种方法是在矩阵超级大，即使是稀疏矩阵来要消耗大量运算资源的情况下，进行使用: <a href="http://eigen.tuxfamily.org/dox/group__MatrixfreeSolverExample.html">基本用法</a></p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
