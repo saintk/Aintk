@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Tue, 18 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 27 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.aintk.xyz/tags/slam/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Eigen实战: BA</title>
+      <link>https://www.aintk.xyz/post/2018-09-27-eigenba/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/2018-09-27-eigenba/</guid>
+      <description>&lt;p&gt;本篇为Eigen的实战环节: eigen求解BA问题。
+&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Eigen库的使用技巧(三)</title>

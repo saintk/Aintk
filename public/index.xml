@@ -52,6 +52,26 @@
     </item>
     
     <item>
+      <title>Linux 安装使用 latex</title>
+      <link>https://www.aintk.xyz/post/2018-10-21-latex/</link>
+      <pubDate>Fri, 26 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/2018-10-21-latex/</guid>
+      <description>&lt;p&gt;这段时间准备写学位论文，开始使用latex.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Eigen实战: BA</title>
+      <link>https://www.aintk.xyz/post/2018-09-27-eigenba/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/2018-09-27-eigenba/</guid>
+      <description>&lt;p&gt;本篇为Eigen的实战环节: eigen求解BA问题。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>莫向外求</title>
       <link>https://www.aintk.xyz/post/2018-09-19-moxiangwaiqiu/</link>
       <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
