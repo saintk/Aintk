@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>vicon-imu标定系统</title>
+  <title>非线性最小二乘(18-11-02更新)</title>
 
   
   
@@ -16,22 +16,22 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content="这篇文章介绍了如何使用vicon系统对imu内参进行标定。 " />
+  <meta name="description" content="高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。 这里介绍细节的非线性最小二乘的方法。 " />
 
   
   
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="vicon-imu标定系统" />
-    <meta name="twitter:description" content="这篇文章介绍了如何使用vicon系统对imu内参进行标定。 " />
+    <meta name="twitter:title" content="非线性最小二乘(18-11-02更新)" />
+    <meta name="twitter:description" content="高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。 这里介绍细节的非线性最小二乘的方法。 " />
     <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
   
 
   
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="vicon-imu标定系统" />
-  <meta property="og:description" content="这篇文章介绍了如何使用vicon系统对imu内参进行标定。 " />
-  <meta property="og:url" content="https://www.aintk.xyz/post/2018-06-05-vicon-imu/" />
+  <meta property="og:title" content="非线性最小二乘(18-11-02更新)" />
+  <meta property="og:description" content="高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。 这里介绍细节的非线性最小二乘的方法。 " />
+  <meta property="og:url" content="https://www.aintk.xyz/post/2018-06-20-zuixiaoercheng/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
 
@@ -40,7 +40,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://www.aintk.xyz/post/2018-06-05-vicon-imu/" />
+<link rel="canonical" href="https://www.aintk.xyz/post/2018-06-20-zuixiaoercheng/" />
 
 <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -226,37 +226,82 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">vicon-imu标定系统</h1>
-      <p class="post-meta">@Sid Wang · Jun 5, 2018 · 1 min read</p>
+      <h1 class="post-title">非线性最小二乘(18-11-02更新)</h1>
+      <p class="post-meta">@Sid Wang · Jun 20, 2018 · 1 min read</p>
     </header>
-    <article class="post-content"><p>这篇文章介绍了如何使用vicon系统对imu内参进行标定。
+    <article class="post-content"><p>高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。
+这里介绍细节的非线性最小二乘的方法。
 </p>
 
-<h2 id="1-基本理念">1. 基本理念</h2>
+<h2 id="1-最小二乘问题">1. 最小二乘问题</h2>
 
-<p>一般情况对imu的简单建模</p>
+<p>最简单的最小二乘问题：<br />
+$$ \underset{x}{min}\frac{1}{2}||f(x)||_{2}^{2} \tag{1}$$
+自变量 $x\epsilon\mathbb{R}^{n}$ ，f是任意非线性函数，设它为m维:$f(x)\epsilon\mathbb{R}^{m}$。<br />
+如果f的形式很简单，问题可能可以用解析形式求解，即令目标函数的导数为零，进而求得x的最优值。但实际应用中并不方便使用这种方法，更多的是使用迭代逼近的方法取找到导数为0的点。</p>
 
-<p>$$ X_{m}=X_{t}+X_{b}+X_{n} $$</p>
+<h3 id="1-1-梯度下降法">1.1 梯度下降法</h3>
 
-<p>其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声</p>
+<p>将目标函数 $||f(x)||^{2}$在x处进行taylor展开：
+$$||f(x+\Delta{x})||^{2} \thickapprox ||f(x)||^{2} + J(x)\Delta{x} + \frac{1}{2}\Delta{x}^{T}H\Delta{x} \tag{2}$$<br />
+J是目标函数$||f(x)||^{2}$关于x的导数，即jacobian矩阵，H为Hssian矩阵。<br />
+如果仅保留一阶项，整理有：
+$$||f(x)||^{2} - ||f(x+\Delta{x})||^{2} =  -J(x)\Delta{x} \tag{3}$$<br />
+在$\Delta{x}$是下降的方向的前提下，即$J(x)\Delta{x}&lt;0$，就可以把右边看作是目标函数从x到$x+\Delta{x}$下降的量。</p>
 
-<p>零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。
-因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。</p>
+<p>进一步，$\Delta{x}$取多少才能使下降量尽可能大？
+首先引入一个步长参数$\lambda$来控制学习率，而限定$\Delta{x}$为单位长度，则显然，当取$\lambda&gt;0$，$\Delta{x}$与-J(x)同向时，右式最大。</p>
 
-<p>然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。
-因此使用高精度的动作捕获系统vicon来估计这个值，无需多余的工作量。</p>
+<p>即结论是函数沿负梯度方向下降最快，即: $\Delta{x^{*}} = -J^{T}(x)$ ，而具体下降的多少，则有步长$\lambda$来确定。</p>
 
-<h2 id="2-理论推导">2. 理论推导</h2></article>
+<p>步长的确定:
+    通常full gradient的方法会使用 Line Search的方式来确定步长， SGD则使用自适应的learning rate, 如AdaDelt，Adam 等等</p>
+
+<p>Armijo + Line Search的基本思想: 每次试一个步长，如果使用该步长，函数值会不会比当前点下降一定的程度，如果没有，就按比例减小步长，再试，直到满足条件(Arimigo-Goldstein condition)</p>
+
+<hr />
+
+<h3 id="1-2-牛顿法">1.2 牛顿法</h3>
+
+<p>2018-11-2日更新，阔别依旧呀~ 诸君~长出来了呀~</p>
+
+<p>上面我们介绍说确定方向即可，只使用了一阶梯度的信息，如果我说，我想直接求出 $\Delta x$ 呢？<br />
+Easy~ 同样的，我们把(2)式子调整一下，保留二阶信息:
+$$ ||f(x)||^{2} - ||f(x+\Delta{x})||^{2} = -J(x)\Delta{x} - \frac{1}{2}\Delta{x}^{T}H\Delta{x} \tag{4}$$<br />
+我们希望取得的 $\Delta x$ 使得左边的下降量最大, 即求等号左边$ y(\Delta x) $ 的极大值， 对$\Delta x$求偏导，有下式:
+$$ H\Delta{x} = -J^T \tag{5} $$</p>
+
+<p>牛顿法存在的问题就是需要计算H矩阵，这在问题规模比较大的时候非常困难，所以一般用拟牛顿法替代。</p>
+
+<hr />
+
+<h3 id="1-3-高斯-牛顿法">1.3 高斯-牛顿法</h3>
+
+<p>高斯-牛顿法则是不再直接对 $f(x)^2$ 展开，而是针对 $f(x)$ 进行展开:
+$$ f(x +\Delta{x}) \thickapprox f(x) + J(x)\Delta{x} \tag{6}$$
+不去寻找x使得目标函数最小，转而去寻找 $\Delta{x}$ 使得下降量最大; 先展开:
+$$ \frac{1}{2}||f(x) + J(x)\Delta{x}||^2 = \frac{1}{2}(||f(x)||_2^2 +2f(x)^T J(x)\Delta{x} + \Delta{x}^T J(x)^T J(x)\Delta{x}) \tag{7}$$<br />
+对上式求$\Delta{x}$偏导，使其等于0，最后得到下式:
+$$ J(x)^T J(x)\Delta{x} = -J(x)^T f(x) \tag{8}$$<br />
+最终也就变成了线性的标准求解形式 $ Ax = b $,就可以使用标准的求解方式计算(SVD分解、Choleskey分解等方法).</p>
+
+<hr />
+
+<h3 id="1-4-列文伯格-马夸尔特法">1.4 列文伯格-马夸尔特法</h3>
+
+<p>上述方法，存在的最大问题，就是当约束不充足，$J^T J$不满秩</p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
         
           <li><a href="https://www.aintk.xyz/tags/vio"><span class="tag">VIO</span></a></li>
         
+          <li><a href="https://www.aintk.xyz/tags/slam"><span class="tag">SLAM</span></a></li>
+        
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>192</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>177</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     

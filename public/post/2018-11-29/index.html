@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>vicon-imu标定系统</title>
+  <title>旋转矩阵的导数</title>
 
   
   
@@ -16,22 +16,28 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content="这篇文章介绍了如何使用vicon系统对imu内参进行标定。 " />
+  <meta name="description" content="在一些公式推导中，我们会见到旋转矩阵R的导数，有左乘、右乘两种形式，容易令人困惑，这里做一些简单的说明。
+
+" />
 
   
   
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="vicon-imu标定系统" />
-    <meta name="twitter:description" content="这篇文章介绍了如何使用vicon系统对imu内参进行标定。 " />
+    <meta name="twitter:title" content="旋转矩阵的导数" />
+    <meta name="twitter:description" content="在一些公式推导中，我们会见到旋转矩阵R的导数，有左乘、右乘两种形式，容易令人困惑，这里做一些简单的说明。
+
+" />
     <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
   
 
   
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="vicon-imu标定系统" />
-  <meta property="og:description" content="这篇文章介绍了如何使用vicon系统对imu内参进行标定。 " />
-  <meta property="og:url" content="https://www.aintk.xyz/post/2018-06-05-vicon-imu/" />
+  <meta property="og:title" content="旋转矩阵的导数" />
+  <meta property="og:description" content="在一些公式推导中，我们会见到旋转矩阵R的导数，有左乘、右乘两种形式，容易令人困惑，这里做一些简单的说明。
+
+" />
+  <meta property="og:url" content="https://www.aintk.xyz/post/2018-11-29/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
 
@@ -40,7 +46,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://www.aintk.xyz/post/2018-06-05-vicon-imu/" />
+<link rel="canonical" href="https://www.aintk.xyz/post/2018-11-29/" />
 
 <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -226,37 +232,28 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">vicon-imu标定系统</h1>
-      <p class="post-meta">@Sid Wang · Jun 5, 2018 · 1 min read</p>
+      <h1 class="post-title">旋转矩阵的导数</h1>
+      <p class="post-meta">@Sid Wang · Nov 29, 2018 · 1 min read</p>
     </header>
-    <article class="post-content"><p>这篇文章介绍了如何使用vicon系统对imu内参进行标定。
-</p>
+    <article class="post-content"><p>在一些公式推导中，我们会见到旋转矩阵R的导数，有左乘、右乘两种形式，容易令人困惑，这里做一些简单的说明。</p>
 
-<h2 id="1-基本理念">1. 基本理念</h2>
+<p></p>
 
-<p>一般情况对imu的简单建模</p>
-
-<p>$$ X_{m}=X_{t}+X_{b}+X_{n} $$</p>
-
-<p>其中，X代表acc和gyro，下标m:测量量，t:真值， b: 零偏， n: 白噪声</p>
-
-<p>零偏Xb通常为一个常量，但会随时间,温度,湿度的改变而改变，具有随机游走性质，其导数服从零均值高斯分布。
-因为这个特性，过一段时间imu内参就需要重新标定一次，标定方法有很多，可以使用一些工具，如kalibr, imu_tk等。</p>
-
-<p>然而在常见vio算法中，在估计位置，速度，姿态的同时，也会同时估算出imu的内参，但想去评估它的准确度是有难度的，每次采数据之前都做一遍标定也比较麻烦。
-因此使用高精度的动作捕获系统vicon来估计这个值，无需多余的工作量。</p>
-
-<h2 id="2-理论推导">2. 理论推导</h2></article>
+<p>旋转矩阵R的导数其形式可以分为两种： $\phi ^\wedge R$ , 和 $R \omega ^\wedge$。<br />
+第一种形式就是14讲中所介绍的形式，第二种可以参考ESKF。<br />
+造成两种形式的主要原因在于导数的微动，可以认为是乘在左边，也可以认为是乘在右边。
+旋转的主体也分为了世界系和体坐标系。<br />
+第二种形式的$\omega$就是体坐标系的角速度，可以通过Gyroscope直接测量，因此可能会更加常用。</p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
         
-          <li><a href="https://www.aintk.xyz/tags/vio"><span class="tag">VIO</span></a></li>
+          <li><a href="https://www.aintk.xyz/tags/slam"><span class="tag">SLAM</span></a></li>
         
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>192</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
       </p>
     </footer>
     

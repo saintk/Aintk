@@ -19,6 +19,7 @@
       
       <guid>https://www.aintk.xyz/home/</guid>
       <description>王兆圣的个人主页。 目前在闵行男子职业技术学院学习，后续会将学习过程中的点滴知识记录在这里。
+em&amp;hellip; 想起来了就更新一下&amp;hellip;
  I&amp;rsquo;ve got you in my sights.</description>
     </item>
     
@@ -39,16 +40,28 @@
       <guid>https://www.aintk.xyz/about/</guid>
       <description>基本资料
 王兆圣， 上海交通大学-导航与感知实验室-在读研究生
-教育背景
-2016年 - 至今， 上海交通大学 电子与通信工程专业 硕士
-2011年 - 2015年，东华大学 自动化专业 学士
 科研背景
 视觉SLAM，VIO，定位
 硕士期间专注室内定位算法，VIO相关应用和研究。
-论文发表情况
- Wang, Zhaosheng, Qian, Jiuchao, Wang, Yuze, Liu, Peinlin, Yu, Wenxian, &amp;ldquo;A Sparse Direct Visual-Inertial Method for Pedestrian Navigation Using Smartphone Sensors,&amp;rdquo; Proceedings of the 30th International Technical Meeting of The Satellite Division of the Institute of Navigation (ION GNSS+ 2017), Portland, Oregon, September 2017, pp. 3311-3320.
-  项目经历
- 2017.</description>
+工作实习经历
+**Sensetime**
+全职，SLAM研究员。 -- Momenta
+实习，SLAM实习生，研发基于环视相机的SLAM系统。
+DiDi
+实习，定位策略实习生，研发基于手机IMU的室内定位系统。
+联系方式
+Email: aintk@hotmail.com</description>
+    </item>
+    
+    <item>
+      <title>旋转矩阵的导数</title>
+      <link>https://www.aintk.xyz/post/2018-11-29/</link>
+      <pubDate>Thu, 29 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/2018-11-29/</guid>
+      <description>&lt;p&gt;在一些公式推导中，我们会见到旋转矩阵R的导数，有左乘、右乘两种形式，容易令人困惑，这里做一些简单的说明。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -211,11 +224,11 @@ em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，�
     </item>
     
     <item>
-      <title>非线性最小二乘</title>
-      <link>https://www.aintk.xyz/post/2018-06-20-optimize/</link>
+      <title>非线性最小二乘(18-11-02更新)</title>
+      <link>https://www.aintk.xyz/post/2018-06-20-zuixiaoercheng/</link>
       <pubDate>Wed, 20 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/2018-06-20-optimize/</guid>
+      <guid>https://www.aintk.xyz/post/2018-06-20-zuixiaoercheng/</guid>
       <description>&lt;p&gt;高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。
 这里介绍细节的非线性最小二乘的方法。
 &lt;/p&gt;</description>

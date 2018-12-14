@@ -35,11 +35,11 @@
     </item>
     
     <item>
-      <title>非线性最小二乘</title>
-      <link>https://www.aintk.xyz/post/2018-06-20-optimize/</link>
+      <title>非线性最小二乘(18-11-02更新)</title>
+      <link>https://www.aintk.xyz/post/2018-06-20-zuixiaoercheng/</link>
       <pubDate>Wed, 20 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/2018-06-20-optimize/</guid>
+      <guid>https://www.aintk.xyz/post/2018-06-20-zuixiaoercheng/</guid>
       <description>&lt;p&gt;高博的SLAM十四讲写的很好，但有些地方可能大家会有点疑问，或者说是不够详尽。
 这里介绍细节的非线性最小二乘的方法。
 &lt;/p&gt;</description>
