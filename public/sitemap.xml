@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>https://www.aintk.xyz/post/2019-04-12-cartographer-code-reading/</loc>
+    <lastmod>2019-04-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.aintk.xyz/post/2018-11-29/</loc>
     <lastmod>2018-11-29T00:00:00+00:00</lastmod>
   </url>
@@ -30,11 +35,6 @@
   <url>
     <loc>https://www.aintk.xyz/post/2018-09-27-eigenba/</loc>
     <lastmod>2018-09-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.aintk.xyz/post/2018-09-19-moxiangwaiqiu/</loc>
-    <lastmod>2018-09-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -113,11 +113,6 @@
   </url>
   
   <url>
-    <loc>https://www.aintk.xyz/post/2018-06-05-xinfan/</loc>
-    <lastmod>2018-06-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.aintk.xyz/</loc>
     <lastmod>2018-05-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -136,13 +131,13 @@
   
   <url>
     <loc>https://www.aintk.xyz/post/</loc>
-    <lastmod>2018-11-29T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.aintk.xyz/tags/slam/</loc>
-    <lastmod>2018-11-29T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -166,7 +161,7 @@
   
   <url>
     <loc>https://www.aintk.xyz/tags/%E6%9D%82%E8%B0%88/</loc>
-    <lastmod>2018-09-19T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>线性方程组求解</title>
+  <title>Cartographer 分析</title>
 
   
   
@@ -16,22 +16,28 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content="通常slam中，会用到一些直接线性方程（DLT）求解的方法，现在来探索一下传统线性方程的求解过程。 " />
+  <meta name="description" content="学习一下Cartographer。
+
+" />
 
   
   
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="线性方程组求解" />
-    <meta name="twitter:description" content="通常slam中，会用到一些直接线性方程（DLT）求解的方法，现在来探索一下传统线性方程的求解过程。 " />
+    <meta name="twitter:title" content="Cartographer 分析" />
+    <meta name="twitter:description" content="学习一下Cartographer。
+
+" />
     <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
   
 
   
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="线性方程组求解" />
-  <meta property="og:description" content="通常slam中，会用到一些直接线性方程（DLT）求解的方法，现在来探索一下传统线性方程的求解过程。 " />
-  <meta property="og:url" content="https://www.aintk.xyz/post/2018-09-07-zuixiao/" />
+  <meta property="og:title" content="Cartographer 分析" />
+  <meta property="og:description" content="学习一下Cartographer。
+
+" />
+  <meta property="og:url" content="https://www.aintk.xyz/post/2019-04-12-cartographer-code-reading/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
 
@@ -40,7 +46,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://www.aintk.xyz/post/2018-09-07-zuixiao/" />
+<link rel="canonical" href="https://www.aintk.xyz/post/2019-04-12-cartographer-code-reading/" />
 
 <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -226,48 +232,38 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">线性方程组求解</h1>
-      <p class="post-meta">@Sid Wang · Sep 7, 2018 · 1 min read</p>
+      <h1 class="post-title">Cartographer 分析</h1>
+      <p class="post-meta">@Sid Wang · Apr 12, 2019 · 1 min read</p>
     </header>
-    <article class="post-content"><p>通常slam中，会用到一些直接线性方程（DLT）求解的方法，现在来探索一下传统线性方程的求解过程。
-</p>
+    <article class="post-content"><p>学习一下Cartographer。</p>
 
-<p>对于线性方程组，解的判定条件如下:<br />
-1. Ax = 0 总有解，至少有零解</p>
+<p></p>
 
-<ol>
-<li><p>Amn x = 0</p>
+<h2 id="overview">Overview</h2>
 
-<ul>
-<li>r(A) = n 只有零解<br /></li>
-<li>r(A) &lt; n 有无穷多解<br /></li>
-</ul></li>
+<p><img src="https://www.aintk.xyz/media/posts/2019-04-12-cartographer-code-reading/high_level_system_overview.png" alt="overview" /></p>
 
-<li><p>Amn x = b</p>
+<p>主要涉及三篇文章
+    1.1  Real-Time Loop Closure in 2D LIDAR SLAM , ICRA 2016
+    1.2  Efficient Sparse Pose Adjustment for 2D Mapping (SPA)
+    1.3  Real-Time Correlative Scan Matching (BBS)</p>
 
-<ul>
-<li>r(A) != r(A|b) 无解<br /></li>
-<li>r(A) = r(A|b) = n 有唯一解<br /></li>
-<li>r(A) = r(A|b) = r &lt; n 有无穷多解<br /></li>
-</ul></li>
-</ol>
+<p>1) Real-Time Loop Closure in 2D LIDAR SLAM
+文章的重点是第四部分和第五部分
+  第四部分：local 2d slam, 主要是将 局部地图的 scan matching作为一个二次型优化问题由ceres slover 解决<br />
+  第五部分： closing loop， 采用了 SPA（Sparse Pose Adjustment）进行后端loop closure。 这个过程中有一个很重要的过程是的scan和 submap的匹配，这（Branch-and-bound scan matching）, 它可大幅提高精度和速度.
+  cartographer的整体架构是典型的 前端建图 （局部地图）+后端优化。 整个性能相比传统的 state-of-the-art的算法没有什么太大的提高， 而是更像一个实用性的产品，很好的平衡了性能和速度。</p>
 
-<p>通常情况我们总是遇到 Amn x = b 的方程，参数数量和未知数个数有如下关系:<br />
-  * m &lt; n , 未知数大于方程数， 有无穷多解， 存在一个高维的解空间<br />
-  * m = n , 如果A可逆，则有唯一解， 解为 $ x = A^{-1}b$<br />
-  * m &gt; n , 方程数大于未知数， 方程一般没有解， 除非 b 属于 A的列向量组成的子空间</p>
+<h2 id="closing-loops">Closing Loops</h2>
 
-<p>对m&gt;=n 且 r(A) =n 的情况，这种超定方程考虑<strong>最小二乘解</strong>， 通过广义逆的方式，可以进行求解， 具体可以使用SVD、QR分解等方法。<br />
-在x normalize到1的情况下，方程的最小二乘解就是矩阵 A‘A的<strong>最小特征值所对应的特征向量</strong>，具体证明参考相关教科书。</p>
+<p>相对Pose存储在memory用于loop closing optimzation. 一旦子图固定，当其他的pairs检测到相对于这部分的scan，就发生了回环检测。</p>
 
-<h2 id="dlt-method">DLT Method</h2>
+<p>A.优化问题
+回环检测的优化问题，可以建模为Sparse Pose Adjustment.</p>
 
-<p>已知3D点，和对应的图像平面观测，可以通过直接线性变换求解 相机的位姿。
-考虑p 为归一化平面表达，P为对应3D点,则满足:
-$$ sp = [R|t]P $$<br />
-待估计参数为增光矩阵 [R|t]，有12个未知数， 每个特征点提供了2个线性方程， 则有6对匹配即可进行求解。 当点数超过6个的时候，求最小二乘解。</p>
+<hr />
 
-<p>DLT不仅仅是用于SLAM中的pnp求相机位姿，更多的用途是求解相机属性参数和成像模型。</p></article>
+<p>待续</p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
@@ -277,7 +273,7 @@ $$ sp = [R|t]P $$<br />
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>321</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>104</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     

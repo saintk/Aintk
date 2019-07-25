@@ -18,7 +18,7 @@
       <pubDate>Wed, 30 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://www.aintk.xyz/home/</guid>
-      <description>王兆圣的个人主页。 目前在闵行男子职业技术学院学习，后续会将学习过程中的点滴知识记录在这里。
+      <description>王兆圣的个人主页。 SLAM研究者。
 em&amp;hellip; 想起来了就更新一下&amp;hellip;
  I&amp;rsquo;ve got you in my sights.</description>
     </item>
@@ -55,6 +55,17 @@ Email: aintk@hotmail.com</description>
     </item>
     
     <item>
+      <title>Cartographer 分析</title>
+      <link>https://www.aintk.xyz/post/2019-04-12-cartographer-code-reading/</link>
+      <pubDate>Fri, 12 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/2019-04-12-cartographer-code-reading/</guid>
+      <description>&lt;p&gt;学习一下Cartographer。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>旋转矩阵的导数</title>
       <link>https://www.aintk.xyz/post/2018-11-29/</link>
       <pubDate>Thu, 29 Nov 2018 00:00:00 +0000</pubDate>
@@ -83,17 +94,6 @@ Email: aintk@hotmail.com</description>
       <guid>https://www.aintk.xyz/post/2018-09-27-eigenba/</guid>
       <description>&lt;p&gt;本篇为Eigen的实战环节: eigen求解BA问题。
 &lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>莫向外求</title>
-      <link>https://www.aintk.xyz/post/2018-09-19-moxiangwaiqiu/</link>
-      <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.aintk.xyz/post/2018-09-19-moxiangwaiqiu/</guid>
-      <description>&lt;p&gt;求神拜佛，先要精诚求己，再谈冥冥天命。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -266,16 +266,6 @@ em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，�
       <guid>https://www.aintk.xyz/post/2018-06-05-vicon-imu/</guid>
       <description>&lt;p&gt;这篇文章介绍了如何使用vicon系统对imu内参进行标定。
 &lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>有点心烦</title>
-      <link>https://www.aintk.xyz/post/2018-06-05-xinfan/</link>
-      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.aintk.xyz/post/2018-06-05-xinfan/</guid>
-      <description>BUG 调不出啊，狠难受啊！！！ 有点想放弃了！！！
-感觉可以推倒重新来过了。。。</description>
     </item>
     
   </channel>
