@@ -7,21 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Fri, 12 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.aintk.xyz/post/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Cartographer 分析</title>
-      <link>https://www.aintk.xyz/post/2019-04-12-cartographer-code-reading/</link>
-      <pubDate>Fri, 12 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.aintk.xyz/post/2019-04-12-cartographer-code-reading/</guid>
-      <description>&lt;p&gt;学习一下Cartographer。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
     
     <item>
       <title>旋转矩阵的导数</title>
