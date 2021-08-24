@@ -328,8 +328,7 @@
 
 <h2 id="3-小结">3.小结</h2>
 
-<p>总的来说，这个工具是用起来还是非常方便的，很棒！<br />
-另外轨迹误差计算过程中，与姿态无关，但是与时间相关，用来评估没有姿态信息的gps轨迹也是可行的。</p></article>
+<p>总的来说，这个工具使用起来是挺方便的，只要按照一定的格式进行存储，保证时间戳正确，就能够评估绝对误差和相对误差。</p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
@@ -339,7 +338,7 @@
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>683</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1174</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -367,7 +366,7 @@
     
   </section>
   <footer class="site-footer">
-  <p>© 2017-2020 Aintk</p>
+  <p>© 2017-2021 Aintk</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>
@@ -418,3 +417,18 @@ if (!doNotTrack) {
 
   </body>
 </html>
+
+<style type="text/css">
+    .fireworks {
+        position=fixed;
+        pointer-events=none;
+        top=0;
+        left=0;
+        height=100%;
+    }
+</style>
+<canvas class="fireworks"></canvas>
+<script src="https://www.aintk.xyz/js/partical.js"></script>
+<script type="text/javascript">
+  fireworks.setCanvasSize();
+</script>

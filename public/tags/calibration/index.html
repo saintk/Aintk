@@ -5,7 +5,11 @@
   <meta charset="utf-8" />
 
   
-  <title>旋转矩阵的导数</title>
+  <title>
+  Tag → calibration
+  
+   | Aintk
+</title>
 
   
   
@@ -16,28 +20,20 @@
 
   
   <meta name="author" content="Sid Wang" />
-  <meta name="description" content="在一些公式推导中，我们会见到旋转矩阵R的导数，有左乘、右乘两种形式，容易令人困惑，这里做一些简单的说明。
-
-" />
+  <meta name="description" content="王兆圣的个人博客" />
 
   
-  
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="旋转矩阵的导数" />
-    <meta name="twitter:description" content="在一些公式推导中，我们会见到旋转矩阵R的导数，有左乘、右乘两种形式，容易令人困惑，这里做一些简单的说明。
-
-" />
-    <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
-  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@gohugoio" />
+  <meta name="twitter:title" content="Aintk" />
+  <meta name="twitter:description" content="王兆圣的个人博客" />
+  <meta name="twitter:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
   
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="旋转矩阵的导数" />
-  <meta property="og:description" content="在一些公式推导中，我们会见到旋转矩阵R的导数，有左乘、右乘两种形式，容易令人困惑，这里做一些简单的说明。
-
-" />
-  <meta property="og:url" content="https://www.aintk.xyz/post/2018-11-29/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Aintk" />
+  <meta property="og:description" content="王兆圣的个人博客" />
+  <meta property="og:url" content="https://www.aintk.xyz/tags/calibration/" />
   <meta property="og:image" content="https://www.aintk.xyz/img/avatar.jpg" />
 
 
@@ -46,7 +42,8 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://www.aintk.xyz/post/2018-11-29/" />
+<link rel="canonical" href="https://www.aintk.xyz/tags/calibration/" />
+<link rel="alternate" type="application/rss" href="https://www.aintk.xyz/tags/calibration/index.xml" title="Aintk" />
 
 <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -107,10 +104,6 @@
     
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
-      
-        
-        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
-        
       
     </div>
     
@@ -230,54 +223,27 @@
   </nav>
 </header>
 
-  <section class="main post-detail">
-    <header class="post-header">
-      <h1 class="post-title">旋转矩阵的导数</h1>
-      <p class="post-meta">@Sid Wang · Nov 29, 2018 · 1 min read</p>
+  <section class="main post-list">
+    <header class="list-header offscreen">
+      <h2 class="list-label">Posts List</h2>
     </header>
-    <article class="post-content"><p>在一些公式推导中，我们会见到旋转矩阵R的导数，有左乘、右乘两种形式，容易令人困惑，这里做一些简单的说明。</p>
+    
+    
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://www.aintk.xyz/post/2018-06-05-hand-eye/" class="post-link">手眼标定的简单应用</a></h3>
+    <p class="post-meta">@Sid Wang · Jun 5, 2018 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">这篇文章介绍了手眼标定在车辆传感器外参标定中的应用。 </p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://www.aintk.xyz/post/2018-06-05-hand-eye/">Read More →</a>
+  </footer>
+</article>
 
-<p></p>
-
-<p>旋转矩阵R的导数其形式可以分为两种： $\phi ^\wedge R$ , 和 $R \omega ^\wedge$。<br />
-第一种形式就是14讲中所介绍的形式，第二种可以参考ESKF。<br />
-造成两种形式的主要原因在于导数的微动，可以认为是乘在左边，也可以认为是乘在右边。
-旋转的主体也分为了世界系和体坐标系。<br />
-第二种形式的$\omega$就是体坐标系的角速度，可以通过Gyroscope直接测量，因此可能会更加常用。</p></article>
-    <footer class="post-footer">
       
-      <ul class="post-tags">
-        
-          <li><a href="https://www.aintk.xyz/tags/slam"><span class="tag">SLAM</span></a></li>
-        
-      </ul>
-      
-      <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>999</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
-      </p>
-    </footer>
     
-      <div id="disqus_thread"></div>
-<script>
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "aintk" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-      
     
   </section>
   <footer class="site-footer">

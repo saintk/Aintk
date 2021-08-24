@@ -18,8 +18,7 @@
       <pubDate>Wed, 30 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://www.aintk.xyz/home/</guid>
-      <description>王兆圣的个人主页。 SLAM研究者。
-em&amp;hellip; 想起来了就更新一下&amp;hellip;
+      <description>王兆圣的个人主页。 记录分享一些知识。
  I&amp;rsquo;ve got you in my sights.</description>
     </item>
     
@@ -39,19 +38,21 @@ em&amp;hellip; 想起来了就更新一下&amp;hellip;
       
       <guid>https://www.aintk.xyz/about/</guid>
       <description>基本资料
-王兆圣， SLAM研究者
-科研背景
-视觉SLAM，VIO，定位
-毕业于上海交通大学-感知与导航实验室，硕士期间专注室内定位算法，VIO相关应用和研究。
-工作实习经历
+王兆圣， 毕业于上海交大感知与导航实验室， 目前是无人驾驶领域从业者。
+工作经历
 Sensetime
-SLAM研究员。
-Momenta
-实习，SLAM实习生，研发基于环视相机的SLAM系统。
-DiDi
-实习，定位策略实习生，研发基于手机IMU的室内定位系统。
+2019-至今
 联系方式
-Email: aintk@hotmail.com</description>
+Email: sidwang33@gmail.com</description>
+    </item>
+    
+    <item>
+      <title>关于更新</title>
+      <link>https://www.aintk.xyz/post/0-aboutupdate/</link>
+      <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/0-aboutupdate/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -179,15 +180,6 @@ em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，�
     </item>
     
     <item>
-      <title>关于更新</title>
-      <link>https://www.aintk.xyz/post/2018-07-09-aboutupdate/</link>
-      <pubDate>Mon, 09 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.aintk.xyz/post/2018-07-09-aboutupdate/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Linux系统挂载</title>
       <link>https://www.aintk.xyz/post/2018-06-27-linux/</link>
       <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
@@ -248,12 +240,12 @@ em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，�
     </item>
     
     <item>
-      <title>vicon-imu标定系统</title>
-      <link>https://www.aintk.xyz/post/2018-06-05-vicon-imu/</link>
+      <title>手眼标定的简单应用</title>
+      <link>https://www.aintk.xyz/post/2018-06-05-hand-eye/</link>
       <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/2018-06-05-vicon-imu/</guid>
-      <description>&lt;p&gt;这篇文章介绍了如何使用vicon系统对imu内参进行标定。
+      <guid>https://www.aintk.xyz/post/2018-06-05-hand-eye/</guid>
+      <description>&lt;p&gt;这篇文章介绍了手眼标定在车辆传感器外参标定中的应用。
 &lt;/p&gt;</description>
     </item>
     

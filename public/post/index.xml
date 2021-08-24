@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Thu, 29 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 10 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.aintk.xyz/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>关于更新</title>
+      <link>https://www.aintk.xyz/post/0-aboutupdate/</link>
+      <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/0-aboutupdate/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>旋转矩阵的导数</title>
@@ -137,15 +146,6 @@ em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，�
     </item>
     
     <item>
-      <title>关于更新</title>
-      <link>https://www.aintk.xyz/post/2018-07-09-aboutupdate/</link>
-      <pubDate>Mon, 09 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.aintk.xyz/post/2018-07-09-aboutupdate/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Linux系统挂载</title>
       <link>https://www.aintk.xyz/post/2018-06-27-linux/</link>
       <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
@@ -206,12 +206,12 @@ em&amp;hellip; 个人习惯花括号一般与function or class 名字同行，�
     </item>
     
     <item>
-      <title>vicon-imu标定系统</title>
-      <link>https://www.aintk.xyz/post/2018-06-05-vicon-imu/</link>
+      <title>手眼标定的简单应用</title>
+      <link>https://www.aintk.xyz/post/2018-06-05-hand-eye/</link>
       <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.aintk.xyz/post/2018-06-05-vicon-imu/</guid>
-      <description>&lt;p&gt;这篇文章介绍了如何使用vicon系统对imu内参进行标定。
+      <guid>https://www.aintk.xyz/post/2018-06-05-hand-eye/</guid>
+      <description>&lt;p&gt;这篇文章介绍了手眼标定在车辆传感器外参标定中的应用。
 &lt;/p&gt;</description>
     </item>
     

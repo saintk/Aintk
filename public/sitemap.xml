@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>https://www.aintk.xyz/post/0-aboutupdate/</loc>
+    <lastmod>2021-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.aintk.xyz/post/2018-11-29/</loc>
     <lastmod>2018-11-29T00:00:00+00:00</lastmod>
   </url>
@@ -73,11 +78,6 @@
   </url>
   
   <url>
-    <loc>https://www.aintk.xyz/post/2018-07-09-aboutupdate/</loc>
-    <lastmod>2018-07-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.aintk.xyz/post/2018-06-27-linux/</loc>
     <lastmod>2018-06-27T00:00:00+00:00</lastmod>
   </url>
@@ -103,7 +103,7 @@
   </url>
   
   <url>
-    <loc>https://www.aintk.xyz/post/2018-06-05-vicon-imu/</loc>
+    <loc>https://www.aintk.xyz/post/2018-06-05-hand-eye/</loc>
     <lastmod>2018-06-05T00:00:00+00:00</lastmod>
   </url>
   
@@ -120,13 +120,19 @@
   </url>
   
   <url>
+    <loc>https://www.aintk.xyz/tags/calibration/</loc>
+    <lastmod>2018-06-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.aintk.xyz/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.aintk.xyz/post/</loc>
-    <lastmod>2018-11-29T00:00:00+00:00</lastmod>
+    <lastmod>2021-05-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -156,7 +162,7 @@
   
   <url>
     <loc>https://www.aintk.xyz/tags/%E6%9D%82%E8%B0%88/</loc>
-    <lastmod>2018-07-09T00:00:00+00:00</lastmod>
+    <lastmod>2021-05-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

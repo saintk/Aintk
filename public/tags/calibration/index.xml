@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Calibration on Aintk</title>
+    <link>https://www.aintk.xyz/tags/calibration/</link>
+    <description>Recent content in Calibration on Aintk</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Tue, 05 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.aintk.xyz/tags/calibration/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>手眼标定的简单应用</title>
+      <link>https://www.aintk.xyz/post/2018-06-05-hand-eye/</link>
+      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.aintk.xyz/post/2018-06-05-hand-eye/</guid>
+      <description>&lt;p&gt;这篇文章介绍了手眼标定在车辆传感器外参标定中的应用。
+&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
